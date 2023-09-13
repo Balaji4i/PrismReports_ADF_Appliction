@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+<AppModule
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="DynamicReports_AM"
+  Version="11.1.1.66.73"
+  InheritPersonalization="merge"
+  ClearCacheOnRollback="true"
+  ComponentClass="com.fouriApps.model.AM.DynamicReports_AMImpl"
+  ComponentInterface="com.fouriApps.model.AM.common.DynamicReports_AM"
+  ClientProxyName="com.fouriApps.model.AM.client.DynamicReports_AMClient">
+  <DesignTime>
+    <Attr Name="_deployType" Value="0"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.fouriApps.model.AM.DynamicReports_AM_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewUsage
+    Name="Reports_ROVO1"
+    ViewObjectName="com.fouriApps.model.ROVO.Reports_ROVO"/>
+  <ViewUsage
+    Name="Functions_VO1"
+    ViewObjectName="com.fouriApps.model.VO.Functions_VO"/>
+  <ViewUsage
+    Name="XxfndReportParamsVo1"
+    ViewObjectName="com.fouriApps.model.VO.XxfndReportParamsVo"/>
+  <ViewUsage
+    Name="LookUp_ROVO1"
+    ViewObjectName="com.fouriApps.model.ROVO.LookUp_ROVO"/>
+  <ViewUsage
+    Name="Dynamic_ROVO1"
+    ViewObjectName="com.fouriApps.model.ROVO.Dynamic_ROVO"/>
+  <ViewUsage
+    Name="FuncBasedOnRoleROVO1"
+    ViewObjectName="com.fouriApps.model.ROVO.FuncBasedOnRoleROVO"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.fouriApps.model.DynamicReports_ModelBundle"/>
+  </ResourceBundle>
+  <ClientInterface>
+    <Method
+      Name="getLOVValues">
+      <Return
+        Type="java.util.ArrayList"/>
+      <Parameter
+        Name="tableName"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="value"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="displayValue"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="lookupType"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="applicationSessionSetup">
+      <Return
+        Type="java.util.Map"/>
+    </Method>
+  </ClientInterface>
+</AppModule>

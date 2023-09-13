@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (c) 2017, Oracle and/or its affiliates. All rights reserved.
+-->
+<menu>
+    <groupNode id="AdminModule" idref="AdminModuleId" label="">
+        <!--Roles-->
+        <!--
+        <itemNode id="Reports" label="Reports" icon="/images/grid_matte_contacts.png"
+                  cardIcon="/images/grid_matte_contacts.png" taskMenuSource="/taskFlow/Reports_BTF.xml"
+                  securedResourceName="/taskFlow/Reports_BTF.xml" focusViewId="/AdminApp"
+                  webApp="AdminApp" applicationStripe="AdminApp" showOnHomeGrid="true"
+                  rendered="true"/> 
+        -->
+         <itemNode id="reportHome" label="Reports" icon="/images/grid_dot_lg_download.png"
+                  cardIcon="/images/grid_dot_lg_download.png" taskMenuSource="/taskFlow/Home_BTF.xml"
+                  securedResourceName="/taskFlow/Home_BTF.xml" focusViewId="/AdminApp"
+                  webApp="AdminApp" applicationStripe="AdminApp" showOnHomeGrid="true" rendered="true"/>
+        <itemNode id="Mail" label="Mail" icon="/images/grid_dot_lg_bill.png"
+                  cardIcon="/images/grid_dot_lg_bill.png" taskMenuSource="/taskFlow/ReceiptMail_BTF.xml"
+                  securedResourceName="/taskFlow/ReceiptMail_BTF.xml" focusViewId="/AdminApp"
+                  webApp="AdminApp" applicationStripe="AdminApp" showOnHomeGrid="true"
+                  rendered="true"/>
+    </groupNode>
+</menu>

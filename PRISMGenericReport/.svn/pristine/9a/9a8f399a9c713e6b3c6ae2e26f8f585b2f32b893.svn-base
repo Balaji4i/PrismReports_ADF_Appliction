@@ -1,0 +1,1034 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:pageTemplate viewId="/oracle/apps/uikit/common/pageTemplates/MainPageTemplate.jspx"
+                   id="pt1">
+    <f:facet name="pageContents">
+      <af:group id="g1">
+        <af:panelStretchLayout id="psl1" startWidth="50%" endWidth="49%" styleClass="AFStretchWidth"
+                               inlineStyle="height:60.0cm;">
+          <f:facet name="center"/>  
+        <f:facet name="start">
+          <af:panelGroupLayout id="pgl3" layout="vertical">
+              <af:panelBox text="Statement of Account" id="pb9"
+                           disclosed="false">
+                <f:facet name="toolbar"/>
+                <af:panelFormLayout id="pfl9">
+                  <af:inputComboboxListOfValues id="customerNameTrans1Id"
+                                                popupTitle="Search and Select: #{bindings.CustomerNameTrans1.hints.label}"
+                                                value="#{bindings.CustomerNameTrans1.inputValue}"
+                                                label="Customer Name"
+                                                model="#{bindings.CustomerNameTrans1.listOfValuesModel}"
+                                                required="#{bindings.CustomerNameTrans1.hints.mandatory}"
+                                                columns="#{bindings.CustomerNameTrans1.hints.displayWidth}"
+                                                shortDesc="#{bindings.CustomerNameTrans1.hints.tooltip}"
+                                                autoSubmit="true"
+                                                binding="#{backingBeanScope.PrismBean.soaCustName}"
+                                                contentStyle="width:200px;">
+                    <f:validator binding="#{bindings.CustomerNameTrans1.validator}"/>
+                  </af:inputComboboxListOfValues>
+                  <af:inputText value="#{bindings.CustomerNumberTrans.inputValue}"
+                                label="Customer Number"
+                                required="#{bindings.CustomerNumberTrans.hints.mandatory}"
+                                columns="#{bindings.CustomerNumberTrans.hints.displayWidth}"
+                                maximumLength="#{bindings.CustomerNumberTrans.hints.precision}"
+                                shortDesc="#{bindings.CustomerNumberTrans.hints.tooltip}"
+                                id="it1" disabled="true"
+                                binding="#{backingBeanScope.PrismBean.custNumber}"
+                                autoSubmit="true"
+                                partialTriggers="customerNameTrans1Id">
+                    <f:validator binding="#{bindings.CustomerNumberTrans.validator}"/>
+                  </af:inputText>
+                  <af:selectOneChoice value="#{bindings.DummyBu.inputValue}"
+                                      label="Business Unit"
+                                      required="#{bindings.DummyBu.hints.mandatory}"
+                                      shortDesc="#{bindings.DummyBu.hints.tooltip}"
+                                      id="soc14" contentStyle="width:225px;"
+                                      visible="false">
+                    <f:selectItems value="#{bindings.DummyBu.items}" id="si14"/>
+                  </af:selectOneChoice>
+                  <af:inputDate label="Date" id="id6"
+                                binding="#{backingBeanScope.PrismBean.soaDate}"
+                                contentStyle="width:200px;"/>
+                  <af:menuBar id="mb2">
+                    <af:menu text="Download" id="m2">
+                      <af:menu text="Excel" id="m3">
+                        <af:commandMenuItem text="Customer Statement of account"
+                                            id="cmi3"
+                                            actionListener="#{backingBeanScope.PrismBean.soaExcel}"/>
+                        <af:commandMenuItem text="Customer Statement of Accounts - Summary"
+                                            id="cmi4"
+                                            actionListener="#{backingBeanScope.PrismBean.soaExcelSummary}"/>
+                      </af:menu>
+                    </af:menu>
+                  </af:menuBar>
+                </af:panelFormLayout>
+              </af:panelBox>
+              <af:panelBox text="Statement of Account" id="pb1" immediate="true"
+                         disclosed="false" rendered="#{bindings.AccessSOAReport.inputValue eq 0 ? false : true}"
+                           visible="false">
+              <af:switcher facetName="#{bindings.AccessSOAReport.inputValue eq 0 ? 'NoAccess' : 'access' }"
+                           id="s11"> 
+                <f:facet name="NoAccess">
+                    <af:group id="g2">
+                      <af:panelGroupLayout id="pgl4" layout="horizontal"
+                                           halign="center">
+                      <af:outputText value="You don't have access to Statement of account report"
+                                     id="ot1"/>
+                    </af:panelGroupLayout>
+                    </af:group>
+                  </f:facet>
+                <f:facet name="access">
+              <af:panelFormLayout id="pfl1" maxColumns="1" rows="10"
+                                  labelWidth="250" fieldWidth="200">
+                <af:inputComboboxListOfValues id="customerNameTransId"
+                                              popupTitle="Search and Select: Customer Name"
+                                              value="#{bindings.CustomerNameTrans.inputValue}"
+                                              binding="#{backingBeanScope.PrismBean.custId}"
+                                              label="Customer Name"
+                                              autoSubmit="true"
+                                              contentStyle="width:225px;"
+                                              model="#{bindings.CustomerNameTrans.listOfValuesModel}"
+                                              required="#{bindings.CustomerNameTrans.hints.mandatory}"
+                                              columns="#{bindings.CustomerNameTrans.hints.displayWidth}"
+                                              shortDesc="#{bindings.CustomerNameTrans.hints.tooltip}">
+                  <f:validator binding="#{bindings.CustomerNameTrans.validator}"/>
+                  <af:autoSuggestBehavior maxSuggestedItems="3"
+                                          suggestItems="#{bindings.CustomerNameTrans.suggestItems}"/>
+                </af:inputComboboxListOfValues>
+                <af:inputComboboxListOfValues id="custIdId" rendered="false"
+                                              popupTitle="Search and Select: #{bindings.CustId.hints.label}"
+                                              value="#{bindings.CustId.inputValue}"
+                                              label="Customer Name"
+                                              autoSubmit="true"
+                                              contentStyle="width:180px;"
+                                              model="#{bindings.CustId.listOfValuesModel}"
+                                              required="#{bindings.CustId.hints.mandatory}"
+                                              columns="#{bindings.CustId.hints.displayWidth}"
+                                              shortDesc="#{bindings.CustId.hints.tooltip}">
+                  <f:validator binding="#{bindings.CustId.validator}"/>
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.CustId.format}"/>
+                </af:inputComboboxListOfValues>
+                <af:inputDate label="Date" id="id1" autoSubmit="true"
+                              contentStyle="width:250px;"
+                              binding="#{backingBeanScope.PrismBean.stmtDate}"/>
+                <af:selectOneChoice value="#{bindings.ReportType.inputValue}"
+                                    label="Report Type"
+                                    required="#{bindings.ReportType.hints.mandatory}"
+                                    shortDesc="#{bindings.ReportType.hints.tooltip}"
+                                    id="soc4" contentStyle="width:250px;"
+                                    binding="#{backingBeanScope.PrismBean.reportType}"
+                                    autoSubmit="true">
+                  <f:selectItems value="#{bindings.ReportType.items}" id="si4"/>
+                </af:selectOneChoice>
+                <af:selectOneChoice value="#{bindings.ReportFormat.inputValue}"
+                                    label="Report Format"
+                                    contentStyle="width:250px;"
+                                    required="#{bindings.ReportFormat.hints.mandatory}"
+                                    shortDesc="#{bindings.ReportFormat.hints.tooltip}"
+                                    id="soc1" autoSubmit="true"
+                                    binding="#{backingBeanScope.PrismBean.reportFormat}">
+                  <f:selectItems value="#{bindings.ReportFormat.items}"
+                                 id="si1"/>
+                </af:selectOneChoice>
+                <af:spacer width="10" height="10" id="s1"/>
+                <af:commandButton text="Download" id="cb1" partialSubmit="true"
+                                  actionListener="#{backingBeanScope.PrismBean.okForStmtAccount}"/>
+              </af:panelFormLayout>
+           </f:facet></af:switcher>
+           </af:panelBox>
+            <af:spacer width="10" height="10" id="s4"/>
+            <af:panelBox text="Sale Report" id="pb2"
+                         disclosed="false"  rendered="#{bindings.AccessSaleReport.inputValue eq 0 ? false : true}">
+               <af:switcher facetName="#{bindings.AccessSaleReport.inputValue eq 0 ? 'NoAccess' : 'access' }"
+                           id="s12"> 
+                <f:facet name="NoAccess">
+                    <af:group id="g3">
+                      <af:panelGroupLayout id="pgl5" layout="horizontal"
+                                           halign="center">
+                      <af:outputText value="You don't have access to Sale Report"
+                                     id="ot7"/>
+                    </af:panelGroupLayout>
+                    </af:group>
+                  </f:facet>
+                <f:facet name="access">
+              <af:panelFormLayout id="pfl3" maxColumns="1" rows="5"
+                                  labelWidth="250" fieldWidth="200">
+                <af:selectOneChoice value="#{bindings.DummyBu.inputValue}"
+                                    label="Business Unit" autoSubmit="true"
+                                    contentStyle="width:225px;" required="true"
+                                    shortDesc="#{bindings.DummyBu.hints.tooltip}"
+                                    id="soc2">
+                  <f:selectItems value="#{bindings.DummyBu.items}" id="si3"/>
+                </af:selectOneChoice>
+                <af:selectOneChoice value="#{bindings.UnitType.inputValue}"
+                                    rendered="false" label="Unit Type"
+                                    autoSubmit="true"
+                                    contentStyle="width:225px;"
+                                    required="#{bindings.UnitType.hints.mandatory}"
+                                    shortDesc="#{bindings.UnitType.hints.tooltip}"
+                                    id="soc3">
+                  <f:selectItems value="#{bindings.UnitType.items}" id="si2"/>
+                </af:selectOneChoice>
+                <af:inputDate label="From Date" id="id3" autoSubmit="true"
+                              contentStyle="width:225px;"
+                              binding="#{backingBeanScope.PrismBean.fromDate}"/>
+                <af:inputDate label="To Date" id="id2" autoSubmit="true"
+                              contentStyle="width:225px;"
+                              binding="#{backingBeanScope.PrismBean.toDate}"/>
+                <af:spacer width="10" height="10" id="s2"/>
+                <af:commandButton text="Download" id="cb2" partialSubmit="true"
+                                  actionListener="#{backingBeanScope.PrismBean.downloadSaleReport}"/>
+              </af:panelFormLayout>
+            </f:facet></af:switcher></af:panelBox>
+            <af:spacer width="10" height="10" id="s5"/>
+              <af:panelBox text="Sale Summary" id="pb11"
+                           rendered="#{bindings.AccessSaleReport.inputValue eq 0 ? false : true}"
+                           disclosed="false" immediate="true">
+                <f:facet name="toolbar"/>
+                <af:panelFormLayout id="pfl11" maxColumns="1" rows="5"
+                                    fieldWidth="200" labelWidth="250">
+                  <f:facet name="footer"/>
+                  <af:inputText label="Sale Period" id="it2"
+                                contentStyle="width:200px;"
+                                binding="#{backingBeanScope.PrismBean.saleperiod}"/>
+                  <af:commandButton text="Download" id="cb9"
+                                    actionListener="#{backingBeanScope.PrismBean.onClickSalesSummary}"/>
+                </af:panelFormLayout>
+              </af:panelBox>
+              <af:spacer width="10" height="10" id="s18"/>
+              <af:panelBox text="Receipt Report" id="pb3" disclosed="false" rendered="#{bindings.AccessReceiptReport.inputValue eq 0 ? false : true}">
+            <af:switcher facetName="#{bindings.AccessReceiptReport.inputValue eq 0 ? 'NoAccess' : 'access' }"
+                           id="s13"> 
+                <f:facet name="NoAccess">
+                    <af:group id="g4">
+                      <af:panelGroupLayout id="pgl6" layout="horizontal"
+                                           halign="center">
+                      <af:outputText value="You don't have access to Receipt Report"
+                                     id="ot8"/>
+                    </af:panelGroupLayout>
+                    </af:group>
+                  </f:facet>
+                <f:facet name="access">
+              <af:panelFormLayout id="pfl4" labelWidth="250">
+                <af:inputListOfValues id="receiptNoId"
+                                      popupTitle="Search and Select: Receipt Number"
+                                      value="#{bindings.ReceiptNo.inputValue}"
+                                      label="Receipt Number"
+                                      model="#{bindings.ReceiptNo.listOfValuesModel}"
+                                      required="#{bindings.ReceiptNo.hints.mandatory}"
+                                      columns="#{bindings.ReceiptNo.hints.displayWidth}"
+                                      shortDesc="#{bindings.ReceiptNo.hints.tooltip}"
+                                      autoSubmit="true"
+                                      contentStyle="width:225px;">
+                  <f:validator binding="#{bindings.ReceiptNo.validator}"/>
+                  <af:autoSuggestBehavior maxSuggestedItems="3"
+                                          suggestItems="#{bindings.ReceiptNo.suggestItems}"/>
+                </af:inputListOfValues>
+                <af:selectOneChoice value="#{bindings.Format.inputValue}"
+                                    label="#{bindings.Format.label}"
+                                    contentStyle="width:250px;"
+                                    required="#{bindings.Format.hints.mandatory}"
+                                    shortDesc="#{bindings.Format.hints.tooltip}"
+                                    id="soc6" autoSubmit="true">
+                  <f:selectItems value="#{bindings.Format.items}" id="si7"/>
+                </af:selectOneChoice>
+                <af:commandButton text="Download Receipt" id="cb3"
+                                  actionListener="#{backingBeanScope.PrismBean.receiptDownload}"/>
+              </af:panelFormLayout>
+           </f:facet></af:switcher> </af:panelBox>
+            <af:spacer width="10" height="10" id="s8" rendered="#{bindings.AccessReceiptReport.inputValue eq 0 ? false : true}"/>
+          <af:panelBox text="Customer Master" id="pb4" disclosed="false" rendered="#{bindings.AccessCustMaster.inputValue eq 0 ? false : true}">
+                <af:panelFormLayout id="pfl7" maxColumns="1" rows="10"
+                                  labelWidth="250" fieldWidth="200">
+                <af:inputComboboxListOfValues id="iclov1"
+                                              popupTitle="Search and Select: Customer Name"
+                                              value="#{bindings.CustomerNameTrans.inputValue}"
+                                              binding="#{backingBeanScope.PrismBean.customerLov}"
+                                              label="Customer Name"
+                                              autoSubmit="true"
+                                              contentStyle="width:225px;"
+                                              model="#{bindings.CustomerNameTrans.listOfValuesModel}"
+                                              required="#{bindings.CustomerNameTrans.hints.mandatory}"
+                                              columns="#{bindings.CustomerNameTrans.hints.displayWidth}"
+                                              shortDesc="#{bindings.CustomerNameTrans.hints.tooltip}">
+                  <f:validator binding="#{bindings.CustomerNameTrans.validator}"/>
+                  <af:autoSuggestBehavior maxSuggestedItems="3"
+                                          suggestItems="#{bindings.CustomerNameTrans.suggestItems}"/>
+                </af:inputComboboxListOfValues>
+                  <af:spacer width="10" height="10" id="s17"/>
+                  <af:selectOneChoice value="#{bindings.Project.inputValue}"
+                                      label="Project Name"
+                                      required="#{bindings.Project.hints.mandatory}"
+                                      shortDesc="#{bindings.Project.hints.tooltip}"
+                                      id="soc8" autoSubmit="true"
+                                      contentStyle="width:250px;">
+                    <f:selectItems value="#{bindings.Project.items}" id="si5"/>
+                  </af:selectOneChoice>
+                  <af:selectOneChoice value="#{bindings.Id.inputValue}"
+                                      label="Project Name"
+                                      required="#{bindings.Id.hints.mandatory}"
+                                      shortDesc="#{bindings.Id.hints.tooltip}"
+                                      id="soc12"
+                                      autoSubmit="true"
+                                      binding="#{backingBeanScope.PrismBean.cmpropertyId}"
+                                      rendered="false">
+                    <f:selectItems value="#{bindings.Id.items}" id="si12"/>
+                  </af:selectOneChoice>
+                    <af:selectOneChoice value="#{bindings.Property2.inputValue}"
+                                      label="Property Name"
+                                      required="#{bindings.Property2.hints.mandatory}"
+                                      shortDesc="#{bindings.Property2.hints.tooltip}"
+                                      id="soc115" autoSubmit="true"
+                                      contentStyle="width:250px;"
+                                        rendered="false">
+                    <f:selectItems value="#{bindings.Property2.items}"
+                                   id="si118"/>
+                  </af:selectOneChoice>
+                  <af:spacer width="10" height="10" id="s16"/>
+                  <af:commandButton text="Download" id="cb7"
+                                    actionListener="#{backingBeanScope.PrismBean.customerMasterDownload}"/>
+                </af:panelFormLayout>
+                <f:facet name="toolbar"/>
+              </af:panelBox>
+              <af:spacer width="10" height="10" id="spacer1"
+                         rendered="#{bindings.AccessReceiptReport.inputValue eq 0 ? false : true}"/>
+              <af:panelBox text="Other Charges" id="pb10" disclosed="false"
+                           rendered="#{bindings.AccessSaleReport.inputValue eq 0 ? false : true}"
+                           immediate="true">
+                <f:facet name="toolbar"/>
+                <af:panelFormLayout id="pfl10" maxColumns="1" rows="10"
+                                    fieldWidth="200" labelWidth="250">
+                  <f:facet name="footer"/>
+                  <af:selectOneChoice value="#{bindings.Property3.inputValue}"
+                                      label="Property Name"
+                                      required="#{bindings.Property3.hints.mandatory}"
+                                      shortDesc="#{bindings.Property3.hints.tooltip}"
+                                      id="soc15" contentStyle="width:200px;"
+                                      autoSubmit="true">
+                    <f:selectItems value="#{bindings.Property3.items}"
+                                   id="si16"/>
+                  </af:selectOneChoice>
+                  <af:inputListOfValues id="unitNumberId"
+                                        popupTitle="Search and Select: #{bindings.UnitNumber.hints.label}"
+                                        value="#{bindings.UnitNumber.inputValue}"
+                                        label="Unit Number"
+                                        model="#{bindings.UnitNumber.listOfValuesModel}"
+                                        required="#{bindings.UnitNumber.hints.mandatory}"
+                                        columns="#{bindings.UnitNumber.hints.displayWidth}"
+                                        shortDesc="#{bindings.UnitNumber.hints.tooltip}"
+                                        contentStyle="width:200px;" autoSubmit="true">
+                    <f:validator binding="#{bindings.UnitNumber.validator}"/>
+                  </af:inputListOfValues>
+                  <af:commandButton text="Download" id="cb8"
+                                    actionListener="#{backingBeanScope.PrismBean.otherChargesDownload}"/>
+                </af:panelFormLayout>
+              </af:panelBox>
+            </af:panelGroupLayout>
+        </f:facet>
+          <f:facet name="end">
+            <af:panelGroupLayout id="pgl1" layout="vertical">
+              <af:panelBox text="Inventory Unit Details Reports" id="pb5"
+                           disclosed="false" rendered="#{bindings.AccessInventoryReport.inputValue eq 0 ? false : true}">
+                <af:switcher facetName="#{bindings.AccessInventoryReport.inputValue eq 0 ? 'NoAccess' : 'access' }"
+                           id="s14"> 
+                <f:facet name="NoAccess">
+                    <af:group id="g5">
+                      <af:panelGroupLayout id="pgl7" layout="horizontal"
+                                           halign="center">
+                      <af:outputText value="You don't have access to Inventory Unit Details Report"
+                                     id="ot9"/>
+                    </af:panelGroupLayout>
+                    </af:group>
+                  </f:facet>
+                <f:facet name="access">
+                <af:panelFormLayout id="pfl5" labelWidth="250">
+                      <af:selectOneChoice value="#{bindings.Property1.inputValue}"
+                                          label="Property Name"
+                                          required="#{bindings.Property1.hints.mandatory}"
+                                          shortDesc="#{bindings.Property1.hints.tooltip}"
+                                          id="soc41" autoSubmit="true"
+                                          partialTriggers="soc5" contentStyle="width:250px;">
+                        <f:selectItems value="#{bindings.Property1.items}"
+                                       id="si41"/>
+                      </af:selectOneChoice>
+                      <af:selectOneChoice value="#{bindings.Building1.inputValue}"
+                                          label="Building Name"
+                                          required="#{bindings.Building1.hints.mandatory}"
+                                          shortDesc="#{bindings.Building1.hints.tooltip}"
+                                          id="soc5" autoSubmit="true"
+                                          partialTriggers="soc41" contentStyle="width:250px;">
+                        <f:selectItems value="#{bindings.Building1.items}"
+                                       id="si6"/>
+                      </af:selectOneChoice>
+                      <af:selectOneChoice value="#{bindings.Format3.inputValue}"
+                                          label="Format"
+                                          required="#{bindings.Format3.hints.mandatory}"
+                                          shortDesc="#{bindings.Format3.hints.tooltip}"
+                                          id="soc7" autoSubmit="true" contentStyle="width:250px;">
+                        <f:selectItems value="#{bindings.Format3.items}"
+                                       id="si8"/>
+                      </af:selectOneChoice>
+                      <af:commandButton text="Inventory Unit Download" id="cb4"
+                                    actionListener="#{backingBeanScope.PrismBean.downloadInventory}"/>
+                </af:panelFormLayout>
+              </f:facet></af:switcher></af:panelBox>
+              <af:spacer width="10" height="10" id="s6"/>
+              <af:panelBox text="Unit Status Report" id="pb7" disclosed="false" rendered="#{bindings.AccessUnitStatusReport.inputValue eq 0 ? false : true}">
+              <af:switcher facetName="#{bindings.AccessUnitStatusReport.inputValue eq 0 ? 'NoAccess' : 'access' }"
+                           id="s15"> 
+                <f:facet name="NoAccess">
+                    <af:group id="g6">
+                      <af:panelGroupLayout id="pgl8" layout="horizontal"
+                                           halign="center">
+                      <af:outputText value="You don't have access to Unit Status Report"
+                                     id="ot10"/>
+                    </af:panelGroupLayout>
+                    </af:group>
+                  </f:facet>
+                <f:facet name="access">
+                    <af:panelGroupLayout id="pgl9">
+                    <af:panelFormLayout id="pfl2" labelWidth="250">
+                        <af:selectOneChoice value="#{bindings.Project1.inputValue}"
+                                            label="Project Name"
+                                            required="#{bindings.Project1.hints.mandatory}"
+                                            shortDesc="#{bindings.Project1.hints.tooltip}"
+                                            id="soc9" autoSubmit="true"
+                                      contentStyle="width:250px;"
+                                            partialTriggers="soc10">
+                          <f:selectItems value="#{bindings.Project1.items}"
+                                         id="si9"/>
+                        </af:selectOneChoice>
+                        <af:selectOneChoice value="#{bindings.Property.inputValue}"
+                                            label="Property Name"
+                                            required="#{bindings.Property.hints.mandatory}"
+                                            shortDesc="#{bindings.Property.hints.tooltip}"
+                                            id="soc10" autoSubmit="true"
+                                      contentStyle="width:250px;"
+                                            partialTriggers="soc9">
+                          <f:selectItems value="#{bindings.Property.items}"
+                                         id="si10"/>
+                        </af:selectOneChoice>
+                        <af:selectOneChoice value="#{bindings.Format4.inputValue}"
+                                            label="Format"
+                                            required="#{bindings.Format4.hints.mandatory}"
+                                            shortDesc="#{bindings.Format4.hints.tooltip}"
+                                            id="soc11" autoSubmit="true"
+                                      contentStyle="width:250px;">
+                          <f:selectItems value="#{bindings.Format4.items}"
+                                         id="si11"/>
+                        </af:selectOneChoice>
+                      </af:panelFormLayout>
+                <af:spacer width="10" height="10" id="s10"/>
+                <af:panelGroupLayout id="pgl2" layout="horizontal"
+                                     halign="left">
+                  <af:spacer width="200" height="10" id="s9"/>
+                  <af:commandButton text="Unit Status - Download" id="cb5"
+                                    actionListener="#{backingBeanScope.PrismBean.unitStatusDownload}"/>
+                  <af:spacer width="10" height="10" id="s3"/>
+                  <af:commandButton text="Unit Status (New) - Download" id="cb6"
+                                    actionListener="#{backingBeanScope.PrismBean.unitStatusNewDownload}"/>
+                </af:panelGroupLayout></af:panelGroupLayout>
+              </f:facet></af:switcher></af:panelBox>
+              <af:spacer width="10" height="10" id="s7"/>
+              <af:panelBox text="Other Reports" id="pb6"
+                           disclosed="false">
+                <af:region value="#{bindings.Reports_BTF1.regionModel}"
+                           id="r1"/>
+              </af:panelBox>
+              <af:panelFormLayout id="pfl6" rendered="false">
+                <af:panelLabelAndMessage label="#{bindings.AccessSOAReport.hints.label}"
+                                         id="plam4">
+                  <af:outputText value="#{bindings.AccessSOAReport.inputValue}"
+                                 id="ot6"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{bindings.AccessSaleReport.hints.label}"
+                                         id="plam3">
+                  <af:outputText value="#{bindings.AccessSaleReport.inputValue}"
+                                 id="ot2"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{bindings.AccessInventoryReport.hints.label}"
+                                         id="plam5">
+                  <af:outputText value="#{bindings.AccessInventoryReport.inputValue}"
+                                 id="ot4"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{bindings.AccessReceiptReport.hints.label}"
+                                         id="plam2">
+                  <af:outputText value="#{bindings.AccessReceiptReport.inputValue}"
+                                 id="ot5"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{bindings.AccessUnitStatusReport.hints.label}"
+                                         id="plam1">
+                  <af:outputText value="#{bindings.AccessUnitStatusReport.inputValue}"
+                                 id="ot3"/>
+                </af:panelLabelAndMessage>
+              </af:panelFormLayout>
+              <af:panelBox text="Receipt Details" id="pb8" disclosed="false">
+                <f:facet name="toolbar"/>
+                <af:panelFormLayout id="pfl8">
+                  <f:facet name="footer"/>
+                  <af:selectOneChoice value="#{bindings.Id.inputValue}"
+                                      label="Property Name"
+                                      required="#{bindings.Id.hints.mandatory}"
+                                      shortDesc="#{bindings.Id.hints.tooltip}"
+                                      id="soc13" contentStyle="width:200px;">
+                    <f:selectItems value="#{bindings.Id.items}" id="si13"/>
+                  </af:selectOneChoice>
+                  <af:inputDate label="From Date" id="id4"
+                                contentStyle="width:200px;"
+                                binding="#{backingBeanScope.PrismBean.fromRDate}"/>
+                  <af:inputDate label="To Date" id="id5"
+                                contentStyle="width:200px;"
+                                binding="#{backingBeanScope.PrismBean.toRDate}"/>
+                  <af:toolbar id="t1">
+                    <af:menuBar id="mb1">
+                      <af:menu text="Download" id="m1">
+                        <af:commandMenuItem text="Excel" id="cmi1"
+                                            actionListener="#{backingBeanScope.PrismBean.onClickReceiptDetailXl}"/>
+                        <af:commandMenuItem text="PDF" id="cmi2"
+                                            actionListener="#{backingBeanScope.PrismBean.onClickReceiptDetailPdf}"/>
+                      </af:menu>
+                    </af:menuBar>
+                  </af:toolbar>
+                </af:panelFormLayout>
+              </af:panelBox>
+              <af:spacer width="10" height="10" id="s19"/>
+              <af:panelBox text="Unit PriceList" id="pb12" disclosed="false">
+                <f:facet name="toolbar"/>
+                <af:panelFormLayout id="pfl12" maxColumns="1" rows="10"
+                                    fieldWidth="200" labelWidth="250">
+                  <f:facet name="footer"/>
+                  <af:selectOneChoice value="#{bindings.PropertyId.inputValue}"
+                                      label="Property Name"
+                                      required="#{bindings.PropertyId.hints.mandatory}"
+                                      shortDesc="#{bindings.PropertyId.hints.tooltip}"
+                                      id="soc16" autoSubmit="true"
+                                      partialTriggers="soc17" contentStyle="width:200px;">
+                                      
+                    <f:selectItems value="#{bindings.PropertyId.items}"
+                                   id="si17"/>
+                  </af:selectOneChoice>
+                  <af:selectOneChoice value="#{bindings.ProjectId.inputValue}"
+                                      label="Project Name"
+                                      required="#{bindings.ProjectId.hints.mandatory}"
+                                      shortDesc="#{bindings.ProjectId.hints.tooltip}"
+                                      id="soc17" autoSubmit="true"
+                                      partialTriggers="soc16" contentStyle="width:200px;"
+                                      
+                                      binding="#{backingBeanScope.PrismBean.priceprojectid2}">
+                    <f:selectItems value="#{bindings.ProjectId.items}"
+                                   id="si18"/>
+                  </af:selectOneChoice>
+                  <af:selectOneChoice value="#{bindings.Unit_Status.inputValue}"
+                                      label="Unit Status"
+                                      required="#{bindings.Unit_Status.hints.mandatory}"
+                                      shortDesc="#{bindings.Unit_Status.hints.tooltip}"
+                                      id="soc19" autoSubmit="true" contentStyle="width:200px;" >
+                    <f:selectItems value="#{bindings.Unit_Status.items}"
+                                   id="si19"/>
+                  </af:selectOneChoice>
+                  <af:selectOneChoice value="#{bindings.Format1.inputValue}"
+                                      label="#{bindings.Format1.label}"
+                                      required="#{bindings.Format1.hints.mandatory}"
+                                      shortDesc="#{bindings.Format1.hints.tooltip}"
+                                      id="soc20" autoSubmit="true" contentStyle="width:200px;">
+                    <f:selectItems value="#{bindings.Format1.items}" id="si20"/>
+                  </af:selectOneChoice>
+                  <af:commandButton text="Download" id="cb10"
+                                    actionListener="#{backingBeanScope.PrismBean.onClickOldPriceListReport}"/>
+                </af:panelFormLayout>
+              </af:panelBox>
+              <af:spacer width="10" height="10" id="s20"/>
+              <af:panelBox text="New Reports" id="pb13" disclosed="false">
+                <f:facet name="toolbar"/>
+                  <af:panelBox text="AR Detailed Report" id="pb14"
+                               disclosed="false">
+                    <f:facet name="toolbar"/>
+                    <af:panelFormLayout id="pfl13" maxColumns="1" rows="10"
+                                        fieldWidth="200" labelWidth="250">
+                      <f:facet name="footer"/>
+                      <af:selectOneChoice value="#{bindings.Projects.inputValue}"
+                                          label="Project Name"
+                                          required="#{bindings.Projects.hints.mandatory}"
+                                          shortDesc="#{bindings.Projects.hints.tooltip}"
+                                          id="soc18" autoSubmit="true"
+                                          contentStyle="width:200px;"
+                                          partialTriggers="soc21">
+                        <f:selectItems value="#{bindings.Projects.items}"
+                                       id="si15"/>
+                      </af:selectOneChoice>
+                      <af:selectOneChoice value="#{bindings.Property6.inputValue}"
+                                          label="Property Name"
+                                          required="#{bindings.Property6.hints.mandatory}"
+                                          shortDesc="#{bindings.Property6.hints.tooltip}"
+                                          id="soc21" autoSubmit="true"
+                                          contentStyle="width:200px;"
+                                          partialTriggers="soc18">
+                        <f:selectItems value="#{bindings.Property6.items}"
+                                       id="si21"/>
+                      </af:selectOneChoice>
+                    <af:selectOneChoice value="#{bindings.Amount_Due.inputValue}"
+                                        label="Amount Due"
+                                        required="#{bindings.Amount_Due.hints.mandatory}"
+                                        shortDesc="#{bindings.Amount_Due.hints.tooltip}"
+                                        id="soc52" autoSubmit="true"
+                                          contentStyle="width:200px;">
+                      <f:selectItems value="#{bindings.Amount_Due.items}"
+                                     id="si52"/>
+                    </af:selectOneChoice>
+                    <af:inputDate label="Date" id="id7" autoSubmit="true"
+                                    contentStyle="width:200px;"
+                                    binding="#{backingBeanScope.PrismBean.arDate}"/>
+                    <af:selectOneChoice value="#{bindings.Format5.inputValue}"
+                                          label="#{bindings.Format5.label}"
+                                          required="#{bindings.Format5.hints.mandatory}"
+                                          shortDesc="#{bindings.Format5.hints.tooltip}"
+                                          id="soc22" autoSubmit="true"
+                                          contentStyle="width:200px;">
+                        <f:selectItems value="#{bindings.Format5.items}"
+                                       id="si22"/>
+                      </af:selectOneChoice>
+                      <af:commandButton text="Download" id="cb11"
+                                        actionListener="#{backingBeanScope.PrismBean.onClickArDetailedReport}"/>
+                    </af:panelFormLayout>
+                  </af:panelBox>
+                  <af:spacer width="10" height="10" id="s22"/>
+                  <af:panelBox text="AR Summary Report" id="pb15"
+                               disclosed="false">
+                    <f:facet name="toolbar"/>
+                    <af:panelFormLayout id="pfl14" maxColumns="1" rows="10"
+                                        fieldWidth="200" labelWidth="250">
+                      <f:facet name="footer"/>
+                      <af:selectOneChoice value="#{bindings.Projects1.inputValue}"
+                                          label="Project Name"
+                                          required="#{bindings.Projects1.hints.mandatory}"
+                                          shortDesc="#{bindings.Projects1.hints.tooltip}"
+                                          id="soc23" autoSubmit="true"
+                                          contentStyle="width:200px;"
+                                          partialTriggers="soc24">
+                        <f:selectItems value="#{bindings.Projects1.items}"
+                                       id="si23"/>
+                      </af:selectOneChoice>
+                      <af:selectOneChoice value="#{bindings.Property7.inputValue}"
+                                          label="Property Name"
+                                          required="#{bindings.Property7.hints.mandatory}"
+                                          shortDesc="#{bindings.Property7.hints.tooltip}"
+                                          id="soc24" autoSubmit="true"
+                                          contentStyle="width:200px;"
+                                          partialTriggers="soc23">
+                        <f:selectItems value="#{bindings.Property7.items}"
+                                       id="si24"/>
+                      </af:selectOneChoice>
+                    <af:selectOneChoice value="#{bindings.Amount_Due1.inputValue}"
+                                        label="Amount Due"
+                                        required="#{bindings.Amount_Due1.hints.mandatory}"
+                                        shortDesc="#{bindings.Amount_Due1.hints.tooltip}"
+                                        id="soc53" autoSubmit="true"
+                                    contentStyle="width:200px;">
+                      <f:selectItems value="#{bindings.Amount_Due1.items}"
+                                     id="si53"/>
+                    </af:selectOneChoice>
+                    <af:inputDate label="Date" id="id8" autoSubmit="true"
+                                    contentStyle="width:200px;"
+                                    binding="#{backingBeanScope.PrismBean.suDate}"/>
+                      <af:selectOneChoice value="#{bindings.Format6.inputValue}"
+                                          label="#{bindings.Format6.label}"
+                                          required="#{bindings.Format6.hints.mandatory}"
+                                          shortDesc="#{bindings.Format6.hints.tooltip}"
+                                          id="soc25" autoSubmit="true"
+                                          contentStyle="width:200px;">
+                        <f:selectItems value="#{bindings.Format6.items}"
+                                       id="si25"/>
+                      </af:selectOneChoice>
+                      <af:commandButton text="Download" id="cb12"
+                                        actionListener="#{backingBeanScope.PrismBean.onClickARSummaryReport}"/>
+                    </af:panelFormLayout>
+                  </af:panelBox>
+                  <af:spacer width="10" height="10" id="s23"/>
+                  <af:panelBox text="Sales Report" id="pb16" disclosed="false">
+                    <f:facet name="toolbar"/>
+                    <af:panelFormLayout id="pfl15" maxColumns="1" rows="10"
+                                        fieldWidth="200" labelWidth="250">
+                      <f:facet name="footer"/>
+                      <af:selectOneChoice value="#{bindings.BusinessUnit.inputValue}"
+                                          label="Business Unit"
+                                          required="#{bindings.BusinessUnit.hints.mandatory}"
+                                          shortDesc="#{bindings.BusinessUnit.hints.tooltip}"
+                                          id="soc26" autoSubmit="true"
+                                          contentStyle="width:200px;">
+                        <f:selectItems value="#{bindings.BusinessUnit.items}"
+                                       id="si26"/>
+                      </af:selectOneChoice>
+                      <af:selectOneChoice value="#{bindings.UnitType1.inputValue}"
+                                          label="Unit  Type"
+                                          required="#{bindings.UnitType1.hints.mandatory}"
+                                          shortDesc="#{bindings.UnitType1.hints.tooltip}"
+                                          id="soc27" autoSubmit="true"
+                                          contentStyle="width:200px;">
+                        <f:selectItems value="#{bindings.UnitType1.items}"
+                                       id="si27"/>
+                      </af:selectOneChoice>
+                      <af:inputDate label="From Date" id="id9"
+                                    binding="#{backingBeanScope.PrismBean.srFromDate}"
+                                    autoSubmit="true"
+                                    contentStyle="width:200px;"/>
+                      <af:inputDate label="To Date" id="id10"
+                                    binding="#{backingBeanScope.PrismBean.srTodate}"
+                                    autoSubmit="true"
+                                    contentStyle="width:200px;"/>
+                      <af:selectOneChoice value="#{bindings.Format7.inputValue}"
+                                          label="Format"
+                                          required="#{bindings.Format7.hints.mandatory}"
+                                          shortDesc="#{bindings.Format7.hints.tooltip}"
+                                          id="soc28" autoSubmit="true"
+                                          contentStyle="width:200px;">
+                        <f:selectItems value="#{bindings.Format7.items}"
+                                       id="si28"/>
+                      </af:selectOneChoice>
+                      <af:commandButton text="Download" id="cb13"
+                                        actionListener="#{backingBeanScope.PrismBean.onClickSalesReportNew}"/>
+                    </af:panelFormLayout>
+                  </af:panelBox>
+                  <af:spacer width="10" height="10" id="s24"/>
+                  <af:panelBox text="Collection Summary Report" id="pb17"
+                               disclosed="false">
+                    <f:facet name="toolbar"/>
+                    <af:panelFormLayout id="pfl16" maxColumns="1" rows="10"
+                                        fieldWidth="200" labelWidth="250">
+                      <f:facet name="footer"/>
+                      <af:selectOneChoice value="#{bindings.BusinessUnit1.inputValue}"
+                                          label="Business Unit"
+                                          required="#{bindings.BusinessUnit1.hints.mandatory}"
+                                          shortDesc="#{bindings.BusinessUnit1.hints.tooltip}"
+                                          id="soc29" autoSubmit="true"
+                                          contentStyle="width:200px;">
+                        <f:selectItems value="#{bindings.BusinessUnit1.items}"
+                                       id="si29"/>
+                      </af:selectOneChoice>
+                      <af:inputDate label="From Date" id="id11"
+                                    autoSubmit="true"
+                                    contentStyle="width:200px;"
+                                    binding="#{backingBeanScope.PrismBean.coFromdate}"/>
+                      <af:inputDate label="To Date" id="id12" autoSubmit="true"
+                                    contentStyle="width:200px;"
+                                    binding="#{backingBeanScope.PrismBean.coToDate}"/>
+                      <af:selectOneChoice value="#{bindings.Format2.inputValue}"
+                                          label="Format"
+                                          required="#{bindings.Format2.hints.mandatory}"
+                                          shortDesc="#{bindings.Format2.hints.tooltip}"
+                                          id="soc30" autoSubmit="true"
+                                          contentStyle="width:200px;">
+                        <f:selectItems value="#{bindings.Format2.items}"
+                                       id="si30"/>
+                      </af:selectOneChoice>
+                      <af:commandButton text="Download" id="cb14"
+                                        actionListener="#{backingBeanScope.PrismBean.onClickCollectionSummaryReport}"/>
+                    </af:panelFormLayout>
+                  </af:panelBox>
+                  <af:spacer width="10" height="10" id="s25"/>
+                  <af:panelBox text="Price List Report" id="pb18"
+                               disclosed="false">
+                    <f:facet name="toolbar"/>
+                    <af:panelFormLayout id="pfl17" maxColumns="1" rows="5"
+                                        fieldWidth="200" labelWidth="250">
+                      <f:facet name="footer"/>
+                      <af:selectOneChoice value="#{bindings.Projects2.inputValue}"
+                                          label="Project Name"
+                                          required="#{bindings.Projects2.hints.mandatory}"
+                                          shortDesc="#{bindings.Projects2.hints.tooltip}"
+                                          id="soc31" autoSubmit="true"
+                                          contentStyle="width:200px;"
+                                          partialTriggers="soc32">
+                        <f:selectItems value="#{bindings.Projects2.items}"
+                                       id="si31"/>
+                      </af:selectOneChoice>
+                      <af:selectOneChoice value="#{bindings.Property8.inputValue}"
+                                          label="Property Name"
+                                          required="#{bindings.Property8.hints.mandatory}"
+                                          shortDesc="#{bindings.Property8.hints.tooltip}"
+                                          id="soc32" autoSubmit="true"
+                                          contentStyle="width:200px;"
+                                          partialTriggers="soc31">
+                        <f:selectItems value="#{bindings.Property8.items}"
+                                       id="si32"/>
+                      </af:selectOneChoice>
+                      <af:selectOneChoice value="#{bindings.UnitStatus.inputValue}"
+                                          label="Unit Status"
+                                          required="#{bindings.UnitStatus.hints.mandatory}"
+                                          shortDesc="#{bindings.UnitStatus.hints.tooltip}"
+                                          id="soc33" autoSubmit="true"
+                                          contentStyle="width:200px;">
+                        <f:selectItems value="#{bindings.UnitStatus.items}"
+                                       id="si33"/>
+                      </af:selectOneChoice>
+                      <af:selectOneChoice value="#{bindings.Format8.inputValue}"
+                                          label="Format"
+                                          required="#{bindings.Format8.hints.mandatory}"
+                                          shortDesc="#{bindings.Format8.hints.tooltip}"
+                                          id="soc34" autoSubmit="true"
+                                          contentStyle="width:200px;">
+                        <f:selectItems value="#{bindings.Format8.items}"
+                                       id="si34"/>
+                      </af:selectOneChoice>
+                      <af:commandButton text="Download" id="cb15"
+                                        actionListener="#{backingBeanScope.PrismBean.onClickPriceList}"/>
+                    </af:panelFormLayout>
+                  </af:panelBox>
+                  <af:spacer width="10" height="10" id="s26"/>
+                  <af:panelBox text="Cancellation Report" id="pb19"
+                               disclosed="false">
+                    <f:facet name="toolbar"/>
+                    <af:panelFormLayout id="pfl18" maxColumns="1" rows="10"
+                                        fieldWidth="200" labelWidth="250">
+                      <f:facet name="footer"/>
+                      <af:selectOneChoice value="#{bindings.Property5.inputValue}"
+                                          label="Property Name"
+                                          required="#{bindings.Property5.hints.mandatory}"
+                                          shortDesc="#{bindings.Property5.hints.tooltip}"
+                                          id="soc35" autoSubmit="true"
+                                          contentStyle="width:200px;">
+                        <f:selectItems value="#{bindings.Property5.items}"
+                                       id="si35"/>
+                      </af:selectOneChoice>
+                      <af:inputDate label="Date" id="id13" autoSubmit="true"
+                                    contentStyle="width:200px;"
+                                    binding="#{backingBeanScope.PrismBean.canDate}"/>
+                      <af:selectOneChoice value="#{bindings.Format9.inputValue}"
+                                          label="Format"
+                                          required="#{bindings.Format9.hints.mandatory}"
+                                          shortDesc="#{bindings.Format9.hints.tooltip}"
+                                          id="soc36" autoSubmit="true"
+                                          contentStyle="width:200px;">
+                        <f:selectItems value="#{bindings.Format9.items}"
+                                       id="si36"/>
+                      </af:selectOneChoice>
+                      <af:commandButton text="Download" id="cb16"
+                                        actionListener="#{backingBeanScope.PrismBean.onClickCancellationReport}"/>
+                    </af:panelFormLayout>
+                  </af:panelBox>
+                  <af:spacer width="10" height="10" id="s27"/>
+                  <af:panelBox text="Inventory Report" id="pb20"
+                               disclosed="false">
+                    <f:facet name="toolbar"/>
+                    <af:panelFormLayout id="pfl19" maxColumns="1" rows="10"
+                                        fieldWidth="200" labelWidth="250">
+                      <f:facet name="footer"/>
+                      <af:selectOneChoice value="#{bindings.Property4.inputValue}"
+                                          label="Property Name"
+                                          required="#{bindings.Property4.hints.mandatory}"
+                                          shortDesc="#{bindings.Property4.hints.tooltip}"
+                                          id="soc38" autoSubmit="true"
+                                          contentStyle="width:200px;"
+                                          partialTriggers="soc39">
+                        <f:selectItems value="#{bindings.Property4.items}"
+                                       id="si38"/>
+                      </af:selectOneChoice>
+                      <af:selectOneChoice value="#{bindings.Building.inputValue}"
+                                          label="Building Name"
+                                          required="#{bindings.Building.hints.mandatory}"
+                                          shortDesc="#{bindings.Building.hints.tooltip}"
+                                          id="soc39" autoSubmit="true"
+                                          contentStyle="width:200px;"
+                                          partialTriggers="soc38">
+                        <f:selectItems value="#{bindings.Building.items}"
+                                       id="si39"/>
+                      </af:selectOneChoice>
+                      <af:selectOneChoice value="#{bindings.Format.inputValue}"
+                                          label="Format"
+                                          required="#{bindings.Format.hints.mandatory}"
+                                          shortDesc="#{bindings.Format.hints.tooltip}"
+                                          id="soc40" autoSubmit="true"
+                                          contentStyle="width:200px;">
+                        <f:selectItems value="#{bindings.Format.items}"
+                                       id="si40"/>
+                      </af:selectOneChoice>
+                      <af:commandButton text="Download" id="cb17"
+                                        actionListener="#{backingBeanScope.PrismBean.onClickInventoryNewReport}"/>
+                    </af:panelFormLayout>
+                  </af:panelBox>
+                  <af:spacer width="10" height="10" id="s28"/>
+                  <af:panelBox text="Daily Collection Report" id="pb21"
+                               disclosed="false">
+                    <f:facet name="toolbar"/>
+                    <af:panelFormLayout id="pfl20" maxColumns="1" rows="10"
+                                        fieldWidth="200" labelWidth="250">
+                      <f:facet name="footer"/>
+                      <af:selectOneChoice value="#{bindings.BusinessUnit2.inputValue}"
+                                          label="Business Unit"
+                                          required="#{bindings.BusinessUnit2.hints.mandatory}"
+                                          shortDesc="#{bindings.BusinessUnit2.hints.tooltip}"
+                                          id="soc37" autoSubmit="true"
+                                          contentStyle="width:200px;">
+                        <f:selectItems value="#{bindings.BusinessUnit2.items}"
+                                       id="si37"/>
+                      </af:selectOneChoice>
+                      <af:inputDate label="From Date" id="id14"
+                                    binding="#{backingBeanScope.PrismBean.dailyfrom}"
+                                    autoSubmit="true"
+                                    contentStyle="width:200px;"/>
+                      <af:inputDate label="To Date" id="id15"
+                                    binding="#{backingBeanScope.PrismBean.dailyto}"
+                                    autoSubmit="true"
+                                    contentStyle="width:200px;"/>
+                      <af:selectOneChoice value="#{bindings.Format10.inputValue}"
+                                          label="Format"
+                                          required="#{bindings.Format10.hints.mandatory}"
+                                          shortDesc="#{bindings.Format10.hints.tooltip}"
+                                          id="soc42" autoSubmit="true"
+                                          contentStyle="width:200px;">
+                        <f:selectItems value="#{bindings.Format10.items}"
+                                       id="si42"/>
+                      </af:selectOneChoice>
+                      <af:commandButton text="Download" id="cb18"
+                                        actionListener="#{backingBeanScope.PrismBean.onClickDailyCollectionNew}"/>
+                    </af:panelFormLayout>
+                  </af:panelBox>
+                <af:spacer width="10" height="10" id="s21"/>
+                <af:panelBox text="DLD Status Report" id="pb22"
+                             disclosed="false">
+                  <f:facet name="toolbar"/>
+                  <af:panelFormLayout id="pfl21" maxColumns="1" rows="10"
+                                      fieldWidth="200" labelWidth="250">
+                    <f:facet name="footer"/>
+                    <af:selectOneChoice value="#{bindings.Project2.inputValue}"
+                                        label="Project Name"
+                                        required="#{bindings.Project2.hints.mandatory}"
+                                        shortDesc="#{bindings.Project2.hints.tooltip}"
+                                        id="soc43" autoSubmit="true"
+                                          contentStyle="width:200px;">
+                      <f:selectItems value="#{bindings.Project2.items}"
+                                     id="si43"/>
+                    </af:selectOneChoice>
+                    <af:selectOneChoice value="#{bindings.Format11.inputValue}"
+                                        label="Format"
+                                        required="#{bindings.Format11.hints.mandatory}"
+                                        shortDesc="#{bindings.Format11.hints.tooltip}"
+                                        id="soc44" autoSubmit="true"
+                                          contentStyle="width:200px;">
+                      <f:selectItems value="#{bindings.Format11.items}"
+                                     id="si44"/>
+                    </af:selectOneChoice>
+                    <af:commandButton text="Download" id="cb19"
+                                      actionListener="#{backingBeanScope.PrismBean.onClickDLDStatus}"/>
+                  </af:panelFormLayout>
+                </af:panelBox>
+                <af:spacer width="10" height="10" id="s29"/>
+                <af:panelBox text="	 Forecast Report" id="pb23"
+                             disclosed="false">
+                  <f:facet name="toolbar"/>
+                  <af:panelFormLayout id="pfl22" maxColumns="1" rows="10"
+                                      fieldWidth="200" labelWidth="250">
+                    <f:facet name="footer"/>
+                    <af:selectOneChoice value="#{bindings.BusinessUnit3.inputValue}"
+                                        label="Business Unit"
+                                        required="#{bindings.BusinessUnit3.hints.mandatory}"
+                                        shortDesc="#{bindings.BusinessUnit3.hints.tooltip}"
+                                        id="soc45" autoSubmit="true"
+                                          contentStyle="width:200px;">
+                      <f:selectItems value="#{bindings.BusinessUnit3.items}"
+                                     id="si45"/>
+                    </af:selectOneChoice>
+                    <af:inputDate label="From Date" id="id16" autoSubmit="true"
+                                          contentStyle="width:200px;"
+                                  binding="#{backingBeanScope.PrismBean.fcastFromDate}"/>
+                    <af:inputDate label="To Date" id="id17" autoSubmit="true"
+                                          contentStyle="width:200px;"
+                                  binding="#{backingBeanScope.PrismBean.fcastToDate}"/>
+                    <af:selectOneChoice value="#{bindings.Format12.inputValue}"
+                                        label="Format"
+                                        required="#{bindings.Format12.hints.mandatory}"
+                                        shortDesc="#{bindings.Format12.hints.tooltip}"
+                                        id="soc46" autoSubmit="true"
+                                          contentStyle="width:200px;">
+                      <f:selectItems value="#{bindings.Format12.items}"
+                                     id="si46"/>
+                    </af:selectOneChoice>
+                    <af:commandButton text="Download" id="cb20"
+                                      actionListener="#{backingBeanScope.PrismBean.onClickForecastReport}"/>
+                  </af:panelFormLayout>
+                </af:panelBox>
+                <af:spacer width="10" height="10" id="s30"/>
+                <af:panelBox text="	 Sales Summary New Report" id="pb24"
+                             disclosed="false">
+                  <f:facet name="toolbar"/>
+                  <af:panelFormLayout id="pfl23" maxColumns="1" rows="10"
+                                      fieldWidth="200" labelWidth="250">
+                    <f:facet name="footer"/>
+                    <af:selectOneChoice value="#{bindings.BusinessUnit4.inputValue}"
+                                        label="Business Unit"
+                                        required="#{bindings.BusinessUnit4.hints.mandatory}"
+                                        shortDesc="#{bindings.BusinessUnit4.hints.tooltip}"
+                                        id="soc47" autoSubmit="true"
+                                          contentStyle="width:200px;">
+                      <f:selectItems value="#{bindings.BusinessUnit4.items}"
+                                     id="si47"/>
+                    </af:selectOneChoice>
+                    <af:selectOneChoice value="#{bindings.UnitType2.inputValue}"
+                                        label="Unit Type"
+                                        required="#{bindings.UnitType2.hints.mandatory}"
+                                        shortDesc="#{bindings.UnitType2.hints.tooltip}"
+                                        id="soc48" autoSubmit="true"
+                                          contentStyle="width:200px;">
+                      <f:selectItems value="#{bindings.UnitType2.items}"
+                                     id="si48"/>
+                    </af:selectOneChoice>
+                    <af:inputDate label="From Date" id="id18" autoSubmit="true"
+                                          contentStyle="width:200px;"
+                                  binding="#{backingBeanScope.PrismBean.salessummaryFromDate}"/>
+                    <af:inputDate label="To Date" id="id19" autoSubmit="true"
+                                          contentStyle="width:200px;"
+                                  binding="#{backingBeanScope.PrismBean.salessummaryToDate}"/>
+                    <af:selectOneChoice value="#{bindings.Format13.inputValue}"
+                                        label="Format"
+                                        required="#{bindings.Format13.hints.mandatory}"
+                                        shortDesc="#{bindings.Format13.hints.tooltip}"
+                                        id="soc49" autoSubmit="true"
+                                          contentStyle="width:200px;">
+                      <f:selectItems value="#{bindings.Format13.items}"
+                                     id="si49"/>
+                    </af:selectOneChoice>
+                    <af:commandButton text="Download" id="cb21"
+                                      actionListener="#{backingBeanScope.PrismBean.onClickSalesSummaryNew}"/>
+                  </af:panelFormLayout>
+                </af:panelBox>
+                <af:spacer width="10" height="10" id="s31"/>
+                <af:panelBox text="Forecast Summary Report " id="pb25"
+                             disclosed="false">
+                  <f:facet name="toolbar"/>
+                  <af:panelFormLayout id="pfl24" maxColumns="1" rows="10"
+                                      fieldWidth="200" labelWidth="250">
+                    <f:facet name="footer"/>
+                    <af:selectOneChoice value="#{bindings.BusinessUnit5.inputValue}"
+                                        label="Business Unit"
+                                        required="#{bindings.BusinessUnit5.hints.mandatory}"
+                                        shortDesc="#{bindings.BusinessUnit5.hints.tooltip}"
+                                        id="soc50" autoSubmit="true" contentStyle="width:200px;">
+                      <f:selectItems value="#{bindings.BusinessUnit5.items}"
+                                     id="si50"/>
+                    </af:selectOneChoice>
+                    <af:inputDate label="From Date" id="id20" autoSubmit="true" contentStyle="width:200px;"
+                                  binding="#{backingBeanScope.PrismBean.fcrSummaryFromDate}"/>
+                    <af:inputDate label="To Date" id="id21" autoSubmit="true" contentStyle="width:200px;"
+                                  binding="#{backingBeanScope.PrismBean.fcrSummaryToDate}"/>
+                    <af:selectOneChoice value="#{bindings.Format14.inputValue}"
+                                        label="Format"
+                                        required="#{bindings.Format14.hints.mandatory}"
+                                        shortDesc="#{bindings.Format14.hints.tooltip}"
+                                        id="soc51" autoSubmit="true" contentStyle="width:200px;">
+                      <f:selectItems value="#{bindings.Format14.items}"
+                                     id="si51"/>
+                    </af:selectOneChoice>
+                    <af:commandButton text="Download" id="cb22"
+                                      actionListener="#{backingBeanScope.PrismBean.onClickForecastSummaryReport}"/>
+                  </af:panelFormLayout>
+                </af:panelBox>
+              </af:panelBox>
+            </af:panelGroupLayout>
+          </f:facet>
+        </af:panelStretchLayout>
+      </af:group>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>

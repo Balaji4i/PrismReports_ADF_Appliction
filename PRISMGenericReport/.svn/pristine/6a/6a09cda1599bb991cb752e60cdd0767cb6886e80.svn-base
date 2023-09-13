@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="Home_BTF">
+    <default-activity id="__1">StmtOfAccount</default-activity>
+    <managed-bean id="__5">
+      <managed-bean-name id="__3">PrismBean</managed-bean-name>
+      <managed-bean-class id="__2">com.fouriApps.view.backing.PrismReportBb</managed-bean-class>
+      <managed-bean-scope id="__4">backingBean</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__6">
+      <managed-bean-name id="__8">pageFlow_fragment_reports</managed-bean-name>
+      <managed-bean-class id="__9">com.fouriApps.view.backing.ReportsPfb</managed-bean-class>
+      <managed-bean-scope id="__7">pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="StmtOfAccount">
+      <page>/StmtOfAccount.jsff</page>
+    </view>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

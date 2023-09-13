@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73" id="MailReceiptPageDef"
+                Package="fragments">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="ReceiptsForEmail" RangeSize="5"
+              DataControl="PrismReport_AMDataControl"
+              id="ReceiptsForEmailIterator"/>
+    <searchRegion Criteria="SearchReceipt_VC"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="ReceiptsForEmailIterator" id="SearchReceiptVCQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="ReceiptsForEmailIterator" id="ReceiptsForEmail">
+      <nodeDefinition DefName="com.fouriApps.model.ROVO.ReceiptsForEmail"
+                      Name="ReceiptsForEmail0">
+        <AttrNames>
+          <Item Value="SelectTrans"/>
+          <Item Value="ReceiptId"/>
+          <Item Value="ReceiptNumber"/>
+          <Item Value="ReceiptDate"/>
+          <Item Value="UnitNumber"/>
+          <Item Value="CustomerName"/>
+          <Item Value="EmailId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="ReceiptsForEmailIterator" id="SelectTrans"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="SelectTrans"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="true"/>
+        <Item Value="false"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="ReceiptsForEmailIterator" id="ToAddress">
+      <AttrNames>
+        <Item Value="ToAddress"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ReceiptsForEmailIterator" id="ReceiptList">
+      <AttrNames>
+        <Item Value="ReceiptList"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

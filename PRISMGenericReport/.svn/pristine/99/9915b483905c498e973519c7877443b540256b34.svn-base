@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ReportAccessRoleROVO"
+  Version="11.1.1.66.73"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Variable
+    Name="UserName"
+    Kind="where"
+    Type="java.lang.String"
+    IsUpdateable="false">
+    <TransientExpression><![CDATA[adf.context.current.sessionScope.get('userName')]]></TransientExpression>
+  </Variable>
+  <Variable
+    Name="BV_FUNC_CODE"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <SQLQuery>
+    <![CDATA[SELECT XXFND_MENU_ACCESS_T.MENU_ACCESS_ID MENU_ACCESS_ID,
+  XXFND_MENU_ACCESS_T.USER_ROLE_ID USER_ROLE_ID,
+  XXFND_MENU_ACCESS_T.SUB_MENU_ID SUB_MENU_ID,
+  XXFND_SUB_MENU_T.SUB_MENU_NAME SUB_MENU_NAME,
+  XXFND_MENU_ACCESS_T.MENU_DISPLAY MENU_DISPLAY,
+  XXFND_MENU_ACCESS_T.MENU_CONTROL MENU_CONTROL,
+  XXFND_FUNCTIONS_T.FUNC_TYPE,
+  XXFND_FUNCTIONS_T.FUNC_SHORT_CODE,
+  XXFND_FUNCTIONS_T.FUNC_ID,
+  XXFND_FUNCTIONS_T.FUNC_NAME
+FROM XXFND_MENU_ACCESS XXFND_MENU_ACCESS_T,
+  XXFND_SUB_MENU XXFND_SUB_MENU_T,
+  XXFND_FUNCTIONS XXFND_FUNCTIONS_T
+WHERE XXFND_MENU_ACCESS_T.SUB_MENU_ID=XXFND_SUB_MENU_T.SUB_MENU_ID
+AND XXFND_MENU_ACCESS_T.USER_ROLE_ID =
+  (SELECT user_role_id FROM XXFND_USER WHERE upper(user_name)=upper(:UserName)
+  )
+AND XXFND_FUNCTIONS_T.FUNC_ID        =XXFND_SUB_MENU_T.FUNC_ID
+AND XXFND_FUNCTIONS_T.FUNC_TYPE      ='R'
+AND XXFND_FUNCTIONS_T.ACTIVE_YN      = 'N'
+AND XXFND_MENU_ACCESS_T.MENU_CONTROL ='F']]>
+  </SQLQuery>
+  <ViewAttribute
+    Name="MenuAccessId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="BIGINT"
+    AliasName="MENU_ACCESS_ID"
+    Expression="MENU_ACCESS_ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="UserRoleId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="USER_ROLE_ID"
+    Expression="USER_ROLE_ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SubMenuId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="SUB_MENU_ID"
+    Expression="SUB_MENU_ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SubMenuName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SUB_MENU_NAME"
+    Expression="SUB_MENU_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="MenuDisplay"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="MENU_DISPLAY"
+    Expression="MENU_DISPLAY"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="MenuControl"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="MENU_CONTROL"
+    Expression="MENU_CONTROL"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FuncType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="FUNC_TYPE"
+    Expression="FUNC_TYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FuncShortCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="FUNC_SHORT_CODE"
+    Expression="FUNC_SHORT_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FuncId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="FUNC_ID"
+    Expression="FUNC_ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FuncName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="60"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="FUNC_NAME"
+    Expression="FUNC_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="60"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="filterByFuncCode"
+    ViewObjectName="com.fouriApps.model.ROVO.ReportAccessRoleROVO"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="vcrow8"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="FuncShortCode"
+        ViewAttribute="FuncShortCode"
+        Operator="="
+        Conjunction="AND"
+        Value=":BV_FUNC_CODE"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+</ViewObject>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73" id="ReportsPageDef" Package="fragments">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Reports_ROVO1" RangeSize="25"
+              DataControl="DynamicReports_AMDataControl" id="Reports_ROVO1Iterator"/>
+    <iterator id="XxfndReportParamsVoIterator" Binds="XxfndReportParamsVo1"
+              DataControl="DynamicReports_AMDataControl" RangeSize="25"/>
+    <iterator id="Functions_VO1Iterator" Binds="Functions_VO1"
+              DataControl="DynamicReports_AMDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+   <list IterBinding="Reports_ROVO1Iterator" StaticList="false"
+          Uses="LOV_Report" id="Report" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <methodAction id="getLOVValues"
+                  InstanceName="DynamicReports_AMDataControl.dataProvider"
+                  DataControl="DynamicReports_AMDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="getLOVValues" IsViewObjectMethod="false"
+                  ReturnName="data.DynamicReports_AMDataControl.methodResults.getLOVValues_DynamicReports_AMDataControl_dataProvider_getLOVValues_result">
+      <NamedData NDName="tableName" NDType="java.lang.String"/>
+      <NamedData NDName="value" NDType="java.lang.String"/>
+      <NamedData NDName="displayValue" NDType="java.lang.String"/>
+      <NamedData NDName="lookupType" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="Reports_ROVO1Iterator" id="ReportPath">
+      <AttrNames>
+        <Item Value="ReportPath"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="Reports_ROVO1Iterator" StaticList="false"
+          Uses="LOV_ReportsFormat" id="ReportsFormat" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="Reports_ROVO1Iterator" id="ReportsFormat1">
+      <AttrNames>
+        <Item Value="ReportsFormat"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="Reports_ROVO1Iterator" id="Report1">
+      <AttrNames>
+        <Item Value="Report"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="Reports_ROVO1Iterator" id="reportsCount">
+      <AttrNames>
+        <Item Value="reportsCount"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

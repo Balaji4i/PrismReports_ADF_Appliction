@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="Reports_BTF">
+    <default-activity id="__5">IsDynamicOrPrism</default-activity>
+    <managed-bean id="__3">
+      <managed-bean-name id="__1">pageFlow_fragment_reports</managed-bean-name>
+      <managed-bean-class id="__2">com.fouriApps.view.backing.ReportsPfb</managed-bean-class>
+      <managed-bean-scope id="__4">pageFlow</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__18">
+      <managed-bean-name id="__17">PrismBean</managed-bean-name>
+      <managed-bean-class id="__15">com.fouriApps.view.backing.PrismReportBb</managed-bean-class>
+      <managed-bean-scope id="__16">backingBean</managed-bean-scope>
+    </managed-bean>
+    <view id="Reports">
+      <page>/fragments/Reports.jsff</page>
+    </view>
+    <view id="StmtOfAccount">
+      <page>/StmtOfAccount.jsff</page>
+    </view>
+    <router id="IsDynamicOrPrism">
+      <case>
+        <expression>#{sessionScope.ScreenName=='stmtAccount'}</expression>
+        <outcome id="__14">stmtAcc</outcome>
+      </case>
+      <case>
+        <expression>#{sessionScope.ScreenName=='saleReport'}</expression>
+        <outcome id="__22">saleReport</outcome>
+      </case>
+      <default-outcome>dynamic</default-outcome>
+    </router>
+    <control-flow-rule id="__6">
+      <from-activity-id id="__7">IsDynamicOrPrism</from-activity-id>
+      <control-flow-case id="__8">
+        <from-outcome id="__10">dynamic</from-outcome>
+        <to-activity-id id="__9">Reports</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__13">
+        <from-outcome id="__12">stmtAcc</from-outcome>
+        <to-activity-id id="__11">StmtOfAccount</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

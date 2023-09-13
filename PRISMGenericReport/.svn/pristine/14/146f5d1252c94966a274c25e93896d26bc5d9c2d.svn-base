@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application"
+             version="11.1.1.66.73" id="DataBindings" SeparateXMLFiles="false"
+             Package="com.fouriApps.view" ClientType="Generic">
+  <definitionFactories>
+    <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding"
+             className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
+    <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+  </definitionFactories>
+  <pageMap>
+    <page path="/fragments/Reports.jsff"
+          usageId="com_fouriApps_view_ReportsPageDef"/>
+    <page path="/pages/Reports.jspx"
+          usageId="com_fouriApps_view_ReportsPageDef1"/>
+    <page path="/pages/FilmStrip.jspx"
+          usageId="com_fouriApps_view_FilmStripPageDef"/>
+    <page path="/StmtOfAccount.jsff"
+          usageId="com_fouriApps_view_StmtOfAccountPageDef"/>
+    <page path="/fragments/SaleReport.jsff"
+          usageId="com_fouriApps_view_SaleReportPageDef"/>
+    <page path="/fragments/MailReceipt.jsff"
+          usageId="com_fouriApps_view_MailReceiptPageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="com_fouriApps_view_ReportsPageDef"
+          path="fragments.ReportsPageDef"/>
+    <page id="com_fouriApps_view_ReportsPageDef1" path="pages.ReportsPageDef"/>
+    <page id="com_fouriApps_view_FilmStripPageDef"
+          path="pages.FilmStripPageDef"/>
+    <page id="com_fouriApps_view_StmtOfAccountPageDef"
+          path="com.fouriApps.view.pageDefs.StmtOfAccountPageDef"/>
+    <page id="com_fouriApps_view_SaleReportPageDef"
+          path="fragments.SaleReportPageDef"/>
+    <page id="com_fouriApps_view_MailReceiptPageDef"
+          path="fragments.MailReceiptPageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <BC4JDataControl id="DynamicReports_AMDataControl"
+                     Package="com.fouriApps.model.AM"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl"
+                     SupportsTransactions="true" SupportsFindMode="true"
+                     SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true"
+                     Configuration="DynamicReports_AMLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+    <BC4JDataControl id="PrismReport_AMDataControl"
+                     Package="com.fouriApps.model.AM"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl"
+                     SupportsTransactions="true" SupportsFindMode="true"
+                     SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true"
+                     Configuration="PrismReport_AMLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
+</Application>

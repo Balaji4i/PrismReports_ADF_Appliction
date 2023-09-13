@@ -1,0 +1,693 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="SeperateReport_ROVO"
+  Version="11.1.1.66.73"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <ViewAccessor
+    Name="ReceiptsROVO"
+    ViewObjectName="com.fouriApps.model.ROVO.ReceiptsROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="PropertyMasterROVO"
+    ViewObjectName="com.fouriApps.model.ROVO.PropertyMasterROVO">
+    <ViewCriteriaUsage
+      Name="filterByProject"
+      FullName="com.fouriApps.model.ROVO.PropertyMasterROVO.filterByProject"/>
+    <ParameterMap>
+      <PIMap Variable="PROJ_ID">
+        <TransientExpression><![CDATA[Project]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="PropertyBuildingsROVO"
+    ViewObjectName="com.fouriApps.model.ROVO.PropertyBuildingsROVO">
+    <ParameterMap>
+      <PIMap Variable="BV_PROP_ID">
+        <TransientExpression><![CDATA[Property4]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="LookUp_ROVO"
+    ViewObjectName="com.fouriApps.model.ROVO.LookUp_ROVO"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="ReportFormat_VC"
+      FullName="com.fouriApps.model.ROVO.LookUp_ROVO.ReportFormat_VC"/>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="PROJECT_ROVO"
+    ViewObjectName="com.fouriApps.model.ROVO.XXSTG_PROJECT_ROVO"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="remove_testv_sterling_project_in_lov"
+      FullName="com.fouriApps.model.ROVO.XXSTG_PROJECT_ROVO.remove_testv_sterling_project_in_lov"/>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="PropertyMasterRO"
+    ViewObjectName="com.fouriApps.model.ROVO.PropertyMasterROVO">
+    <ViewCriteriaUsage
+      Name="filterByProject"
+      FullName="com.fouriApps.model.ROVO.PropertyMasterROVO.filterByProject"/>
+    <ParameterMap>
+      <PIMap Variable="PROJ_ID">
+        <TransientExpression><![CDATA[Project]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ReportAccessSOAReport"
+    ViewObjectName="com.fouriApps.model.ROVO.ReportAccessRoleROVO">
+    <ViewCriteriaUsage
+      Name="filterByFuncCode"
+      FullName="com.fouriApps.model.ROVO.ReportAccessRoleROVO.filterByFuncCode"/>
+    <ParameterMap>
+      <PIMap Variable="BV_FUNC_CODE">
+        <TransientExpression><![CDATA['CSOA']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ReportAccessSaleReport"
+    ViewObjectName="com.fouriApps.model.ROVO.ReportAccessRoleROVO">
+    <ViewCriteriaUsage
+      Name="filterByFuncCode"
+      FullName="com.fouriApps.model.ROVO.ReportAccessRoleROVO.filterByFuncCode"/>
+    <ParameterMap>
+      <PIMap Variable="BV_FUNC_CODE">
+        <TransientExpression><![CDATA['SR']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ReportAccessReceipt"
+    ViewObjectName="com.fouriApps.model.ROVO.ReportAccessRoleROVO">
+    <ViewCriteriaUsage
+      Name="filterByFuncCode"
+      FullName="com.fouriApps.model.ROVO.ReportAccessRoleROVO.filterByFuncCode"/>
+    <ParameterMap>
+      <PIMap Variable="BV_FUNC_CODE">
+        <TransientExpression><![CDATA['BR']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ReportAccessInventory"
+    ViewObjectName="com.fouriApps.model.ROVO.ReportAccessRoleROVO">
+    <ViewCriteriaUsage
+      Name="filterByFuncCode"
+      FullName="com.fouriApps.model.ROVO.ReportAccessRoleROVO.filterByFuncCode"/>
+    <ParameterMap>
+      <PIMap Variable="BV_FUNC_CODE">
+        <TransientExpression><![CDATA['AI']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ReportAccessUnitStatus"
+    ViewObjectName="com.fouriApps.model.ROVO.ReportAccessRoleROVO">
+    <ViewCriteriaUsage
+      Name="filterByFuncCode"
+      FullName="com.fouriApps.model.ROVO.ReportAccessRoleROVO.filterByFuncCode"/>
+    <ParameterMap>
+      <PIMap Variable="BV_FUNC_CODE">
+        <TransientExpression><![CDATA['USN']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ReportAccessCustMaster"
+    ViewObjectName="com.fouriApps.model.ROVO.ReportAccessRoleROVO">
+    <ViewCriteriaUsage
+      Name="filterByFuncCode"
+      FullName="com.fouriApps.model.ROVO.ReportAccessRoleROVO.filterByFuncCode"/>
+    <ParameterMap>
+      <PIMap Variable="BV_FUNC_CODE">
+        <TransientExpression><![CDATA['CUST_M']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="PropertyUnitsROVO1"
+    ViewObjectName="com.fouriApps.model.ROVO.PropertyUnitsROVO">
+    <ParameterMap>
+      <PIMap Variable="Bv_prop_id">
+        <TransientExpression><![CDATA[Property2]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="PropertyMasterROVO2"
+    ViewObjectName="com.fouriApps.model.ROVO.PropertyMasterRO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="PropertyMasterROVO3"
+    ViewObjectName="com.fouriApps.model.ROVO.PropertyMasterROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="PropertyMasterROVO4"
+    ViewObjectName="com.fouriApps.model.ROVO.PropertyMasterROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="PropertyMasterROVO5"
+    ViewObjectName="com.fouriApps.model.ROVO.PropertyMasterROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="PropertyMasterROVO6"
+    ViewObjectName="com.fouriApps.model.ROVO.PropertyMasterROVO"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_ReceiptNo"
+    ListVOName="ReceiptsROVO"
+    ListRangeSize="10"
+    NullValueFlag="none"
+    NullValueId="LOV_ReceiptNo_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ReceiptNo"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="ReceiptNumber"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="ReceiptNumber"/>
+      <Item Value="CustomerName"/>
+      <Item Value="ReceiptDate"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="SearchByReceipNo"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Project"
+    ListVOName="PROJECT_ROVO"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Project"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="ProjId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="ProjectName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Property"
+    ListVOName="PropertyMasterROVO"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Property"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="PropertyId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="PropertyName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Building"
+    ListVOName="PropertyBuildingsROVO"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Building"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="BuildId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="BuildName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Format"
+    ListVOName="LookUp_ROVO"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Format"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="LookupValueName"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="LookupValueNameDisp"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Property2"
+    ListVOName="PropertyMasterRO"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Property2"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="PropertyId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="PropertyName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_UnitNumber"
+    ListVOName="PropertyUnitsROVO1"
+    ListRangeSize="10"
+    NullValueFlag="none"
+    NullValueId="LOV_UnitNumber_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="UnitNumber"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="UnitNumber"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="UnitNumber"/>
+      <Item Value="PropertyName"/>
+      <Item Value="BuildName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="lov_unit_search"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Property3"
+    ListVOName="PropertyMasterROVO3"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Property3"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="PropertyId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="PropertyName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Property4"
+    ListVOName="PropertyMasterROVO4"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Property4"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="PropertyId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="PropertyName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Property5"
+    ListVOName="PropertyMasterROVO5"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Property5"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="PropertyId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="PropertyName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Property6"
+    ListVOName="PropertyMasterROVO6"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Property6"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="PropertyId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="PropertyName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <SQLQuery>
+    <![CDATA[SELECT 
+    null AS RECEIPT_NO, 
+    0 AS PROJECT, 
+    0 AS PROPERTY, 
+    null AS PROPERTY2, 
+    0 AS BUILDING, 
+    null AS UNIT_NUMBER, 
+    null AS FORMAT, 
+    null AS PROPERTY3, 
+    null AS PROPERTY4, 
+    null AS PROPERTY5, 
+    null AS PROPERTY6, 
+    null AS PROPERTY7 
+FROM 
+    dual]]>
+  </SQLQuery>
+  <ViewAttribute
+    Name="ReceiptNo"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="240"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="RECEIPT_NO"
+    Expression="RECEIPT_NO"
+    SQLType="VARCHAR"
+    LOVName="LOV_ReceiptNo">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Project"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PROJECT"
+    Expression="PROJECT"
+    SQLType="NUMERIC"
+    LOVName="LOV_Project">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Property"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PROPERTY"
+    Expression="PROPERTY"
+    SQLType="NUMERIC"
+    LOVName="LOV_Property">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+    <Dependencies>
+      <Item
+        Value="Project"/>
+    </Dependencies>
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Property2"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PROPERTY2"
+    Expression="PROPERTY2"
+    SQLType="NUMERIC"
+    LOVName="LOV_Property2">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+    <Dependencies>
+      <Item
+        Value="Project"/>
+    </Dependencies>
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Building"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="BUILDING"
+    Expression="BUILDING"
+    SQLType="NUMERIC"
+    LOVName="LOV_Building">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="UnitNumber"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="UNIT_NUMBER"
+    Expression="UNIT_NUMBER"
+    SQLType="VARCHAR"
+    LOVName="LOV_UnitNumber"
+    Precision="60">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Format"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="FORMAT"
+    Precision="240"
+    Expression="FORMAT"
+    SQLType="VARCHAR"
+    LOVName="LOV_Format">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Property3"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="BIGINT"
+    AliasName="PROPERTY3"
+    SQLType="VARCHAR"
+    Expression="PROPERTY3"
+    LOVName="LOV_Property3">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="default"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Property4"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="BIGINT"
+    AliasName="PROPERTY4"
+    Expression="PROPERTY4"
+    SQLType="VARCHAR"
+    LOVName="LOV_Property4">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Property5"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="BIGINT"
+    AliasName="PROPERTY5"
+    Expression="PROPERTY5"
+    SQLType="VARCHAR"
+    LOVName="LOV_Property5">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Property6"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PROPERTY6"
+    Expression="PROPERTY6"
+    SQLType="VARCHAR"
+    LOVName="LOV_Property6">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Property7"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PROPERTY7"
+    Expression="PROPERTY7"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="AccessSOAReport"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <TransientExpression><![CDATA[ReportAccessSOAReport.count("FuncId")]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AccessSaleReport"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <TransientExpression><![CDATA[ReportAccessSaleReport.count("FuncId")]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AccessInventoryReport"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <TransientExpression><![CDATA[ReportAccessInventory.count("FuncId")]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AccessReceiptReport"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <TransientExpression><![CDATA[ReportAccessReceipt.count("FuncId")]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AccessUnitStatusReport"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <TransientExpression><![CDATA[ReportAccessUnitStatus.count("FuncId")]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AccessCustMaster"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[ReportAccessCustMaster.count("FuncId")]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="UnitId"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+</ViewObject>

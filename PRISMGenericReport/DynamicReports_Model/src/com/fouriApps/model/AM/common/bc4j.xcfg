@@ -1,0 +1,25 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig version="11.1" xmlns="http://xmlns.oracle.com/bc4j/configuration">
+   <AppModuleConfigBag ApplicationName="com.fouriApps.model.AM.DynamicReports_AM">
+      <AppModuleConfig DeployPlatform="LOCAL" jbo.project="com.fouriApps.model.DynamicReports_Model" name="DynamicReports_AMLocal" ApplicationName="com.fouriApps.model.AM.DynamicReports_AM" java.naming.factory.initial="oracle.jbo.common.JboInitialContextFactory">
+         <Security AppModuleJndiName="com.fouriApps.model.AM.DynamicReports_AM"/>
+         <Custom JDBCDataSource="jdbc/prism"/>
+      </AppModuleConfig>
+      <AppModuleConfig DeployPlatform="LOCAL" jbo.project="com.fouriApps.model.DynamicReports_Model" name="DynamicReports_AMShared" ApplicationName="com.fouriApps.model.AM.DynamicReports_AM" java.naming.factory.initial="oracle.jbo.common.JboInitialContextFactory">
+         <AM-Pooling jbo.ampool.dynamicjdbccredentials="false" jbo.ampool.isuseexclusive="false" jbo.ampool.maxpoolsize="1" jbo.ampool.resetnontransactionalstate="false"/>
+         <Security AppModuleJndiName="com.fouriApps.model.AM.DynamicReports_AM"/>
+         <Custom JDBCDataSource="jdbc/prism"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+   <AppModuleConfigBag ApplicationName="com.fouriApps.model.AM.PrismReport_AM">
+      <AppModuleConfig DeployPlatform="LOCAL" jbo.project="com.fouriApps.model.DynamicReports_Model" name="PrismReport_AMLocal" ApplicationName="com.fouriApps.model.AM.PrismReport_AM" java.naming.factory.initial="oracle.jbo.common.JboInitialContextFactory">
+         <Security AppModuleJndiName="com.fouriApps.model.AM.PrismReport_AM"/>
+         <Custom JDBCDataSource="jdbc/prism"/>
+      </AppModuleConfig>
+      <AppModuleConfig name="PrismReport_AMShared" DeployPlatform="LOCAL" jbo.project="com.fouriApps.model.DynamicReports_Model" java.naming.factory.initial="oracle.jbo.common.JboInitialContextFactory" ApplicationName="com.fouriApps.model.AM.PrismReport_AM">
+         <AM-Pooling jbo.ampool.dynamicjdbccredentials="false" jbo.ampool.isuseexclusive="false" jbo.ampool.maxpoolsize="1" jbo.ampool.resetnontransactionalstate="false"/>
+         <Security AppModuleJndiName="com.fouriApps.model.AM.PrismReport_AM"/>
+         <Custom JDBCDataSource="jdbc/prism"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+</BC4JConfig>

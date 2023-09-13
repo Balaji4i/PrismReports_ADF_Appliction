@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73" id="StmtOfAccountPageDef"
+                Package="com.fouriApps.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="XXSTG_CUSTOMER_ROVO" RangeSize="25"
+              DataControl="PrismReport_AMDataControl"
+              id="XXSTG_CUSTOMER_ROVOIterator"/>
+    <iterator Binds="XXSTG_ORGANIZATIONS_ROVO" RangeSize="25"
+              DataControl="PrismReport_AMDataControl"
+              id="XXSTG_ORGANIZATIONS_ROVOIterator"/>
+    <taskFlow id="Reports_BTF1"
+              taskFlowId="/taskFlow/Reports_BTF.xml#Reports_BTF"
+              activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <iterator Binds="SeperateReport_ROVO" RangeSize="25"
+              DataControl="PrismReport_AMDataControl"
+              id="SeperateReport_ROVOIterator" Refresh="ifNeeded"/>
+    <iterator Binds="PropertyMasterRO1" RangeSize="25"
+              DataControl="PrismReport_AMDataControl"
+              id="PropertyMasterRO1Iterator"/>
+    <iterator Binds="XXSTG_CUSTOMER_ROVO1" RangeSize="25"
+              DataControl="PrismReport_AMDataControl"
+              id="XXSTG_CUSTOMER_ROVO1Iterator"/>
+    <iterator Binds="PropertyMasterROVO1" RangeSize="25"
+              DataControl="PrismReport_AMDataControl"
+              id="PropertyMasterROVO1Iterator"/>
+    <iterator Binds="OLD_Inventory_ROVO1" RangeSize="25"
+              DataControl="PrismReport_AMDataControl"
+              id="OLD_Inventory_ROVO1Iterator"/>
+    <iterator Binds="Unit_Status_ROVO1" RangeSize="25"
+              DataControl="PrismReport_AMDataControl"
+              id="Unit_Status_ROVO1Iterator"/>
+    <iterator Binds="AR_DETAILED_NEW_ROVO1" RangeSize="25"
+              DataControl="PrismReport_AMDataControl"
+              id="AR_DETAILED_NEW_ROVO1Iterator"/>
+    <iterator Binds="AR_SUMMARY_ROVO1" RangeSize="25"
+              DataControl="PrismReport_AMDataControl"
+              id="AR_SUMMARY_ROVO1Iterator"/>
+    <iterator Binds="SALEA_REPORT_NEW_ROVO1" RangeSize="25"
+              DataControl="PrismReport_AMDataControl"
+              id="SALEA_REPORT_NEW_ROVO1Iterator"/>
+    <iterator Binds="COLLECTION_SUMMARY_NEW_ROVO1" RangeSize="25"
+              DataControl="PrismReport_AMDataControl"
+              id="COLLECTION_SUMMARY_NEW_ROVO1Iterator"/>
+    <iterator Binds="PRICE_LIST_NEW_ROVO1" RangeSize="25"
+              DataControl="PrismReport_AMDataControl"
+              id="PRICE_LIST_NEW_ROVO1Iterator"/>
+    <iterator Binds="CANCELLATION_REPORT_ROVO1" RangeSize="25"
+              DataControl="PrismReport_AMDataControl"
+              id="CANCELLATION_REPORT_ROVO1Iterator"/>
+    <iterator Binds="DAILY_COLLECTION_NEW_ROVO1" RangeSize="25"
+              DataControl="PrismReport_AMDataControl"
+              id="DAILY_COLLECTION_NEW_ROVO1Iterator"/>
+    <iterator Binds="DLD_STATUS_REPORT1" RangeSize="25"
+              DataControl="PrismReport_AMDataControl"
+              id="DLD_STATUS_REPORT1Iterator"/>
+    <iterator Binds="FORCAST_REPORT_ROVO1" RangeSize="25"
+              DataControl="PrismReport_AMDataControl"
+              id="FORCAST_REPORT_ROVO1Iterator"/>
+    <iterator Binds="SALES_SUMMARY_REPORT_NEW_ROVO1" RangeSize="25"
+              DataControl="PrismReport_AMDataControl"
+              id="SALES_SUMMARY_REPORT_NEW_ROVO1Iterator"/>
+    <iterator Binds="FORECAST_SUMMARY_ROVO1" RangeSize="25"
+              DataControl="PrismReport_AMDataControl"
+              id="FORECAST_SUMMARY_ROVO1Iterator"/>
+  </executables>
+  <bindings>
+    <list IterBinding="XXSTG_CUSTOMER_ROVOIterator" ListOperMode="navigation"
+          ListIter="XXSTG_CUSTOMER_ROVOIterator" id="XXSTG_CUSTOMER_ROVO"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="CustomerName"/>
+      </AttrNames>
+    </list>
+    <listOfValues StaticList="false" IterBinding="XXSTG_CUSTOMER_ROVOIterator"
+                  Uses="LOV_CustId" id="CustId"/>
+    <list IterBinding="XXSTG_CUSTOMER_ROVOIterator" StaticList="false"
+          Uses="LOV_ReportFormat" id="ReportFormat" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <listOfValues StaticList="false" IterBinding="XXSTG_CUSTOMER_ROVOIterator"
+                  Uses="LOV_CustomerNameTrans" id="CustomerNameTrans"/>
+    <list IterBinding="XXSTG_ORGANIZATIONS_ROVOIterator" StaticList="false"
+          Uses="LOV_DummyBu" id="DummyBu" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="XXSTG_ORGANIZATIONS_ROVOIterator" StaticList="false"
+          Uses="LOV_UnitType" id="UnitType" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="XXSTG_CUSTOMER_ROVOIterator" StaticList="false"
+          Uses="LOV_ReportType" id="ReportType" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <listOfValues StaticList="false" IterBinding="SeperateReport_ROVOIterator"
+                  Uses="LOV_ReceiptNo" id="ReceiptNo"/>
+    <list IterBinding="SeperateReport_ROVOIterator" StaticList="false"
+          Uses="LOV_Project" id="Project" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="SeperateReport_ROVOIterator" StaticList="false"
+          Uses="LOV_Building" id="Building" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="SeperateReport_ROVOIterator" StaticList="false"
+          Uses="LOV_Format" id="Format" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="SeperateReport_ROVOIterator" StaticList="false"
+          Uses="LOV_Property2" id="Property2" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="SeperateReport_ROVOIterator"
+                     id="AccessSOAReport">
+      <AttrNames>
+        <Item Value="AccessSOAReport"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeperateReport_ROVOIterator"
+                     id="AccessSaleReport">
+      <AttrNames>
+        <Item Value="AccessSaleReport"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeperateReport_ROVOIterator"
+                     id="AccessInventoryReport">
+      <AttrNames>
+        <Item Value="AccessInventoryReport"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeperateReport_ROVOIterator"
+                     id="AccessReceiptReport">
+      <AttrNames>
+        <Item Value="AccessReceiptReport"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeperateReport_ROVOIterator"
+                     id="AccessUnitStatusReport">
+      <AttrNames>
+        <Item Value="AccessUnitStatusReport"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeperateReport_ROVOIterator"
+                     id="AccessCustMaster">
+      <AttrNames>
+        <Item Value="AccessCustMaster"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="PropertyMasterRO1Iterator" StaticList="false"
+          Uses="LOV_Id" id="Id" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <listOfValues StaticList="false" IterBinding="XXSTG_CUSTOMER_ROVO1Iterator"
+                  Uses="LOV_CustomerNameTrans" id="CustomerNameTrans1"/>
+    <attributeValues IterBinding="XXSTG_CUSTOMER_ROVO1Iterator"
+                     id="CustomerNumberTrans">
+      <AttrNames>
+        <Item Value="CustomerNumberTrans"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false" IterBinding="SeperateReport_ROVOIterator"
+                  Uses="LOV_UnitNumber" id="UnitNumber"/>
+    <list IterBinding="PropertyMasterROVO1Iterator" StaticList="false"
+          Uses="LOV_PropertyId" id="PropertyId" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="PropertyMasterROVO1Iterator" StaticList="false"
+          Uses="LOV_ProjectId" id="ProjectId" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="PropertyMasterROVO1Iterator" StaticList="false"
+          Uses="LOV_Unit_Status" id="Unit_Status" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="PropertyMasterROVO1Iterator" StaticList="false"
+          Uses="LOV_Format" id="Format1" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="SeperateReport_ROVOIterator" StaticList="false"
+          Uses="LOV_Property3" id="Property3" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="SeperateReport_ROVOIterator" StaticList="false"
+          Uses="LOV_Property4" id="Property4" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="OLD_Inventory_ROVO1Iterator" StaticList="false"
+          Uses="LOV_Property" id="Property1" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="OLD_Inventory_ROVO1Iterator" StaticList="false"
+          Uses="LOV_Building" id="Building1" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="OLD_Inventory_ROVO1Iterator" StaticList="false"
+          Uses="LOV_Format" id="Format3" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="Unit_Status_ROVO1Iterator" StaticList="false"
+          Uses="LOV_Project" id="Project1" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="Unit_Status_ROVO1Iterator" StaticList="false"
+          Uses="LOV_Property" id="Property" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="Unit_Status_ROVO1Iterator" StaticList="false"
+          Uses="LOV_Format" id="Format4" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="AR_DETAILED_NEW_ROVO1Iterator" StaticList="false"
+          Uses="LOV_Projects" id="Projects" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="AR_DETAILED_NEW_ROVO1Iterator" StaticList="false"
+          Uses="LOV_Property" id="Property6" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="AR_DETAILED_NEW_ROVO1Iterator" StaticList="false"
+          Uses="LOV_Format" id="Format5" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="AR_SUMMARY_ROVO1Iterator" StaticList="false"
+          Uses="LOV_Property" id="Property7" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="AR_SUMMARY_ROVO1Iterator" StaticList="false"
+          Uses="LOV_Format" id="Format6" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="SALEA_REPORT_NEW_ROVO1Iterator" StaticList="false"
+          Uses="LOV_BusinessUnit" id="BusinessUnit" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="SALEA_REPORT_NEW_ROVO1Iterator" StaticList="false"
+          Uses="LOV_UnitType" id="UnitType1" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="SALEA_REPORT_NEW_ROVO1Iterator" StaticList="false"
+          Uses="LOV_Format" id="Format7" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="COLLECTION_SUMMARY_NEW_ROVO1Iterator" StaticList="false"
+          Uses="LOV_BusinessUnit" id="BusinessUnit1" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="COLLECTION_SUMMARY_NEW_ROVO1Iterator" StaticList="false"
+          Uses="LOV_Format" id="Format2" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="PRICE_LIST_NEW_ROVO1Iterator" StaticList="false"
+          Uses="LOV_Projects" id="Projects2" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="PRICE_LIST_NEW_ROVO1Iterator" StaticList="false"
+          Uses="LOV_Property" id="Property8" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="PRICE_LIST_NEW_ROVO1Iterator" StaticList="false"
+          Uses="LOV_UnitStatus" id="UnitStatus" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="PRICE_LIST_NEW_ROVO1Iterator" StaticList="false"
+          Uses="LOV_Format" id="Format8" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="CANCELLATION_REPORT_ROVO1Iterator" StaticList="false"
+          Uses="LOV_Property" id="Property5" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="CANCELLATION_REPORT_ROVO1Iterator" StaticList="false"
+          Uses="LOV_Format" id="Format9" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="DAILY_COLLECTION_NEW_ROVO1Iterator" StaticList="false"
+          Uses="LOV_BusinessUnit" id="BusinessUnit2" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="DAILY_COLLECTION_NEW_ROVO1Iterator" StaticList="false"
+          Uses="LOV_Format" id="Format10" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="AR_SUMMARY_ROVO1Iterator" StaticList="false"
+          Uses="LOV_Projects" id="Projects1" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="DLD_STATUS_REPORT1Iterator" StaticList="false"
+          Uses="LOV_Project" id="Project2" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="DLD_STATUS_REPORT1Iterator" StaticList="false"
+          Uses="LOV_Format" id="Format11" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="FORCAST_REPORT_ROVO1Iterator" StaticList="false"
+          Uses="LOV_BusinessUnit" id="BusinessUnit3" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="FORCAST_REPORT_ROVO1Iterator" StaticList="false"
+          Uses="LOV_Format" id="Format12" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="SALES_SUMMARY_REPORT_NEW_ROVO1Iterator"
+          StaticList="false" Uses="LOV_BusinessUnit" id="BusinessUnit4"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="SALES_SUMMARY_REPORT_NEW_ROVO1Iterator"
+          StaticList="false" Uses="LOV_UnitType" id="UnitType2"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="SALES_SUMMARY_REPORT_NEW_ROVO1Iterator"
+          StaticList="false" Uses="LOV_Format" id="Format13"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="FORECAST_SUMMARY_ROVO1Iterator" StaticList="false"
+          Uses="LOV_BusinessUnit" id="BusinessUnit5" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="FORECAST_SUMMARY_ROVO1Iterator" StaticList="false"
+          Uses="LOV_Format" id="Format14" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="AR_DETAILED_NEW_ROVO1Iterator" StaticList="false"
+          Uses="LOV_Amount_Due" id="Amount_Due" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="AR_SUMMARY_ROVO1Iterator" StaticList="false"
+          Uses="LOV_Amount_Due" id="Amount_Due1" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+  </bindings>
+</pageDefinition>

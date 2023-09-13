@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="Reports_ROVO"
+  Version="11.1.1.66.73"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  RowClass="com.fouriApps.model.ROVO.Reports_ROVORowImpl"
+  ComponentClass="com.fouriApps.model.ROVO.Reports_ROVOImpl">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.fouriApps.model.ROVO.Reports_ROVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewAccessor
+    Name="Functions_VO1"
+    ViewObjectName="com.fouriApps.model.VO.Functions_VO"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="FindActiveFuncByFuncType"
+      FullName="com.fouriApps.model.VO.Functions_VO.FindActiveFuncByFuncType"/>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="LookUp_ROVO1"
+    ViewObjectName="com.fouriApps.model.ROVO.LookUp_ROVO">
+    <ViewCriteriaUsage
+      Name="findByTransCategoryVC"
+      FullName="com.fouriApps.model.ROVO.LookUp_ROVO.findByTransCategoryVC"/>
+    <ParameterMap>
+      <PIMap Variable="pLookupTypeName">
+        <TransientExpression><![CDATA["REPORTS_FORMAT"]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="FuncBasedOnRoleROVO1"
+    ViewObjectName="com.fouriApps.model.ROVO.FuncBasedOnRoleROVO">
+    <ParameterMap>
+      <PIMap Variable="userName">
+        <TransientExpression><![CDATA[adf.context.current.sessionScope.get('userName')]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ListBinding
+    Name="LOV_ReportsFormat"
+    ListVOName="LookUp_ROVO1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    NullValueId="LOV_ReportsFormat_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ReportsFormat"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="LookupValueName"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="LookupValueNameDisp"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Report"
+    ListVOName="FuncBasedOnRoleROVO1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    NullValueId="LOV_Report_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Report"/>
+    </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="ReportPath"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="FuncId"/>
+      <Item Value="PagePath"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="FuncName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <SQLQuery>
+    <![CDATA[select * from dual]]>
+  </SQLQuery>
+  <ViewAttribute
+    Name="Dummy"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    AliasName="DUMMY"
+    Expression="DUMMY"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Report"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_Report">
+    <Properties>
+      <SchemaBasedProperties>
+        <AUTOSUBMIT
+          Value="true"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ReportPath"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <Dependencies>
+      <Item
+        Value="Report"/>
+    </Dependencies>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ReportsFormat"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_ReportsFormat"
+    DefaultValue="PDF">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="reportsCount"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="INTEGER"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <TransientExpression><![CDATA[FuncBasedOnRoleROVO1.count("FuncId")]]></TransientExpression>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.fouriApps.model.DynamicReports_ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

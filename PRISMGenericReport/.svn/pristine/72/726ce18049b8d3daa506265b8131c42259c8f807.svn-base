@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="ReceiptMail_BTF">
+    <default-activity id="__1">MailReceipt</default-activity>
+    <managed-bean id="__2">
+      <managed-bean-name id="__4">ReceiptMailBB</managed-bean-name>
+      <managed-bean-class id="__3">com.fouriApps.view.mail.ReceiptMailBB</managed-bean-class>
+      <managed-bean-scope id="__5">backingBean</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__8">
+      <managed-bean-name id="__6">FilmStripBean</managed-bean-name>
+      <managed-bean-class id="__7">com.dynamicreports.view.beans.filmStrip.FilmStripBean</managed-bean-class>
+      <managed-bean-scope id="__9">backingBean</managed-bean-scope>
+    </managed-bean>
+    <view id="MailReceipt">
+      <page>/fragments/MailReceipt.jsff</page>
+    </view>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

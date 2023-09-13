@@ -1,0 +1,162 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:pageTemplate viewId="/oracle/apps/uikit/common/pageTemplates/MainPageTemplate.jspx"
+                   id="pt1">
+    <f:facet name="pageContents"> 
+      <af:panelGroupLayout layout="vertical" id="pgl1">
+        <af:panelBox text="Search Receipt" id="pb1" showDisclosure="false">
+          <f:facet name="toolbar">
+            <af:toolbar id="t2">
+                <af:panelGroupLayout id="pgl3" layout="horizontal" halign="end">
+            <af:commandImageLink id="bl2"
+                                 actionListener="#{backingBeanScope.FilmStripBean.hideFSDropDown}"
+                                 visible="#{sessionScope.hideStrip ne true}"
+                                 shortDesc="Hide the Film Strip"
+                                 icon="/images/func_arrowheadup_16_act.png"/>
+            <af:commandImageLink id="bl1"
+                                 actionListener="#{backingBeanScope.FilmStripBean.showFSDropDown}"
+                                 visible="#{sessionScope.hideStrip eq true}"
+                                 shortDesc="Show Film Strip"
+                                 icon="/images/func_arrowheaddown_16_act.png"/>
+          </af:panelGroupLayout>
+            </af:toolbar>
+          </f:facet>
+          <af:spacer width="10" height="10" id="s1"/>
+          <af:query headerText="Search Receipt" disclosed="true" id="q1"
+           value="#{bindings.SearchReceiptVCQuery.queryDescriptor}"
+                                    model="#{bindings.SearchReceiptVCQuery.queryModel}"
+                                    queryListener="#{bindings.SearchReceiptVCQuery.processQuery}"
+                                    queryOperationListener="#{bindings.SearchReceiptVCQuery.processQueryOperation}"
+                    saveQueryMode="hidden" displayMode="design"
+                    maxColumns="2" rows="2"/>
+          <af:quickQuery label="Search By Receipt No / Unit / Customer" id="qq1"
+                                    value="#{bindings.SearchReceiptVCQuery.queryDescriptor}"
+                                    model="#{bindings.SearchReceiptVCQuery.queryModel}"
+                                    queryListener="#{bindings.SearchReceiptVCQuery.processQuery}"
+                                    queryOperationListener="#{bindings.SearchReceiptVCQuery.processQueryOperation}"
+                                    searchDesc="Search" rendered="false"/>
+          <af:spacer width="10" height="10" id="s2"/>
+          <af:panelBox text="Select receipts to send mail" id="pb2" showDisclosure="false">
+            <f:facet name="toolbar"/>
+            <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+              <af:table value="#{bindings.ReceiptsForEmail.collectionModel}"
+                        var="row" rows="#{bindings.ReceiptsForEmail.rangeSize}"
+                        emptyText="#{bindings.ReceiptsForEmail.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.ReceiptsForEmail.rangeSize}" scrollPolicy="page"
+                        rowBandingInterval="0"
+                        selectedRowKeys="#{bindings.ReceiptsForEmail.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.ReceiptsForEmail.collectionModel.makeCurrent}"
+                        rowSelection="single" id="resId1"
+                        columnStretching="column:resId1c6"
+                        partialTriggers=":::qq1 :::q1" autoHeightRows="0">
+                <af:column headerText="#{bindings.ReceiptsForEmail.hints.SelectTrans.label}"
+                           id="c1" width="50" align="center"
+                           sortProperty="#{bindings.ReceiptsForEmail.hints.SelectTrans.name}"
+                           sortable="true">
+                  <af:selectBooleanCheckbox value="#{row.bindings.SelectTrans.inputValue}"
+                                            label="#{row.bindings.SelectTrans.label}"
+                                            autoSubmit="true"
+                                            shortDesc="#{bindings.ReceiptsForEmail.hints.SelectTrans.tooltip}"
+                                            id="sbc1"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.ReceiptsForEmail.hints.ReceiptId.name}"
+                           sortable="true" visible="false"
+                           headerText="#{bindings.ReceiptsForEmail.hints.ReceiptId.label}"
+                           id="resId1c1">
+                  <af:outputText value="#{row.ReceiptId}" id="ot6"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.ReceiptsForEmail.hints.ReceiptNumber.name}"
+                           sortable="true"
+                           headerText="#{bindings.ReceiptsForEmail.hints.ReceiptNumber.label}"
+                           id="resId1c2">
+                  <af:panelGroupLayout id="pgl2">
+                    <af:outputText value="#{row.ReceiptNumber}" id="ot5"/>
+                  </af:panelGroupLayout>
+                </af:column>
+                <af:column sortProperty="#{bindings.ReceiptsForEmail.hints.ReceiptDate.name}"
+                           sortable="true"
+                           headerText="#{bindings.ReceiptsForEmail.hints.ReceiptDate.label}"
+                           id="resId1c3">
+                  <af:outputText value="#{row.ReceiptDate}" id="ot2">
+                    <af:convertDateTime pattern="#{bindings.ReceiptsForEmail.hints.ReceiptDate.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.ReceiptsForEmail.hints.UnitNumber.name}"
+                           sortable="true"
+                           headerText="#{bindings.ReceiptsForEmail.hints.UnitNumber.label}"
+                           id="resId1c4" width="200">
+                  <af:outputText value="#{row.UnitNumber}" id="ot4"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.ReceiptsForEmail.hints.CustomerName.name}"
+                           sortable="true"
+                           headerText="#{bindings.ReceiptsForEmail.hints.CustomerName.label}"
+                           id="resId1c5" width="200">
+                  <af:outputText value="#{row.CustomerName}" id="ot1"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.ReceiptsForEmail.hints.EmailId.name}"
+                           sortable="true"
+                           headerText="#{bindings.ReceiptsForEmail.hints.EmailId.label}"
+                           id="resId1c6">
+                  <af:outputText value="#{row.EmailId}" id="ot3"/>
+                </af:column>
+              </af:table>
+              <f:facet name="toolbar">
+                <af:toolbar id="t1" flex="10">
+                  <af:commandImageLink text="Send" id="cb1"  icon="/images/helpportal_goto_qualifier.png"
+                                    disabled="#{bindings.ReceiptsForEmail.estimatedRowCount eq 0}"
+                                    actionListener="#{backingBeanScope.ReceiptMailBB.onClickSend}"
+                                       partialTriggers="::qq1 ::q1"> 
+                  </af:commandImageLink> 
+                  <af:popup id="p1"
+                            binding="#{backingBeanScope.ReceiptMailBB.mailPop}">
+                    <af:dialog id="d1" title="Send Receipts" type="none"
+                               closeIconVisible="false" titleIconSource="/images/email_qualifier.png"
+                               inlineStyle="border-color:#44bcfc;">
+                      <af:panelFormLayout id="pfl1">
+                      <af:inputText value="#{bindings.ReceiptList.inputValue}"
+                                      label="Receipts"
+                                      contentStyle="width:500px;" disabled="true"
+                                      required="#{bindings.ReceiptList.hints.mandatory}"
+                                      columns="#{bindings.ReceiptList.hints.displayWidth}"
+                                      maximumLength="#{bindings.ReceiptList.hints.precision}"
+                                      shortDesc="#{bindings.ReceiptList.hints.tooltip}"
+                                      id="it2">
+                          <f:validator binding="#{bindings.ReceiptList.validator}"/>
+                        </af:inputText>
+                        <af:inputText value="#{bindings.ToAddress.inputValue}"
+                                      label="To Address"
+                                      contentStyle="width:500px;"
+                                      required="true"
+                                      columns="#{bindings.ToAddress.hints.displayWidth}"
+                                      maximumLength="#{bindings.ToAddress.hints.precision}"
+                                      shortDesc="#{bindings.ToAddress.hints.tooltip}"
+                                      id="it1" partialTriggers="cb1">
+                          <f:validator binding="#{bindings.ToAddress.validator}"/>
+                        </af:inputText>
+                        <af:inputText label="CC Address" id="it3" 
+                                        contentStyle="width:500px;" disabled="true"
+                                      value="#{backingBeanScope.ReceiptMailBB.CCAddress}"/>
+                      </af:panelFormLayout>
+                      <f:facet name="buttonBar">
+                        <af:panelGroupLayout id="pgl4" layout="horizontal"
+                                             halign="center" valign="middle">
+                          <af:commandButton text="Send" id="cb2"  icon="/images/checkmark_sm_ovr.png"
+                                            actionListener="#{backingBeanScope.ReceiptMailBB.onSendInPop}"/>
+                          <af:spacer width="10" height="10" id="s3"/>
+                          <af:commandButton text="Cancel" id="cb3" immediate="true" icon="/images/delete_status.png"
+                                            actionListener="#{backingBeanScope.ReceiptMailBB.onCancelInPop}">
+                            <af:resetActionListener/>
+                          </af:commandButton> 
+                        </af:panelGroupLayout>
+                      </f:facet>
+                    </af:dialog>
+                  </af:popup>
+                </af:toolbar>
+              </f:facet>
+            </af:panelCollection>
+          </af:panelBox>
+        </af:panelBox>
+      </af:panelGroupLayout> 
+</f:facet></af:pageTemplate></jsp:root>

@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+Copyright (c) 2017, Oracle and/or its affiliates. All rights reserved.
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1"
+                 title="Reports">
+    <f:facet name="metaContainer">      
+    <af:outputText escape="false"              
+            value="&lt;link href=&quot;#{facesContext.externalContext.requestContextPath}/favicon.ico&quot; rel=&quot;shortcut icon&quot;>" id="o1"/>   
+    </f:facet> 
+      <af:form id="f1" usesUpload="true">
+        <af:resource type="javascript" source="js/jquery-3.1.1.js"/>
+        <af:resource type="javascript" source="js/svgIcons.js"/>
+        <af:resource type="javascript" source="js/filmStrip.js"/>
+        <af:pageTemplate viewId="/oracle/apps/uikit/common/pageTemplates/SimpleUIShell.jspx"
+                         id="pt1">
+          <f:facet name="pageContents">
+            <af:panelGroupLayout id="pgl2" layout="vertical">
+              <af:commandButton id="amHidden" clientComponent="true"
+                                visible="false" shortDesc="Hidden">
+                <af:serverListener type="iconClicked"
+                                   method="#{backingBeanScope.FilmStripBean.handleFilmStripCardClick}"/>
+              </af:commandButton>
+              <af:panelGroupLayout id="filmStripPG" layout="vertical">
+              <af:spacer height="10" rendered="#{sessionScope.hideStrip}"
+                         id="s2"/>
+              <af:panelGroupLayout id="pgl2Film" halign="center"
+                                   layout="vertical" rendered="#{!sessionScope.hideStrip}">
+                <af:outputText id="ot2"
+                               value="#{backingBeanScope.FilmStripBean.filmStripLayout[sessionScope.selectedItemId]}"/>
+                <af:conveyorBelt id="cb2" clientComponent="true">
+                  <div class="strip-container AFStretchWidth" id="app-strip"/>
+                </af:conveyorBelt>
+              </af:panelGroupLayout>
+               <af:spacer height="30" id="s1"
+                         rendered="#{sessionScope.hideStrip}"/>
+              </af:panelGroupLayout>
+              <af:region value="#{bindings.dynamicRegion1.regionModel}"
+                         id="r1"
+                         binding="#{backingBeanScope.FilmStripBean.dynamicRegionBinding}"/>
+            </af:panelGroupLayout>
+          </f:facet>
+        </af:pageTemplate>        
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>
